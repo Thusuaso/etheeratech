@@ -26,6 +26,7 @@ export const useProjects = () => {
         "CSS",
         "Bootstrap",
         "Socket.io",
+        "PrimeVue"
       ],
     },
     {
@@ -42,13 +43,66 @@ export const useProjects = () => {
       ],
       techStack: [
         "Nuxt.js",
-        "Chart.js",
-        "Python API",
-        "Javascript",
         "HTML",
         "CSS",
         "Bootstrap",
-        "Socket.io",
+      ],
+    },
+    {
+      id: "bulut-project",
+      title: "Otel İşletmesi Web Sitesi",
+      desc: "Otel sektöründe faaliyet gösteren bir firma için geliştirilmiştir, reklam, iletişim ve randevu alma sistemini içeren kurumsal bir web sitesi.",
+      gif: "/images/projects/bulut/bulut-gif.gif",
+      images: [
+        "/images/projects/bulut/bulut-1.png",
+        "/images/projects/bulut/bulut-2.png",
+        "/images/projects/bulut/bulut-3.png",
+        "/images/projects/bulut/bulut-4.png",
+        "/images/projects/bulut/bulut-5.png",
+      ],
+      techStack: [
+        "Nuxt.js",
+        "HTML",
+        "CSS",
+        "TailwindCss",
+      ],
+    },
+    {
+      id: "rast-project",
+      title: "Kuaför İşletmesi Web Sitesi",
+      desc: "Kuaför sektöründe faaliyet gösteren bir firma için geliştirilmiştir, reklam, iletişim ve randevu alma sistemini içeren kurumsal bir web sitesi.",
+      gif: "/images/projects/rast/rast-gif.gif",
+      images: [
+        "/images/projects/rast/rast-1.png",
+        "/images/projects/rast/rast-2.png",
+        "/images/projects/rast/rast-3.png",
+        "/images/projects/rast/rast-4.png",
+        "/images/projects/rast/rast-5.png",
+      ],
+      techStack: [
+        "Nuxt.js",
+        "HTML",
+        "CSS",
+        "TailwindCss",
+      ],
+    },
+        {
+      id: "ravilion-project",
+      title: "Tekstil Firması Web Sitesi",
+      desc: "Tekstil sektöründe faaliyet gösteren bir firma için geliştirilmiştir, reklam, iletişim, fiyat alma ve satın alma sistemini içeren kurumsal bir web sitesi.",
+      gif: "/images/projects/ravilion/ravilion-gif.gif",
+      images: [
+        "/images/projects/ravilion/ravilion-1.png",
+        "/images/projects/ravilion/ravilion-2.png",
+        "/images/projects/ravilion/ravilion-3.png",
+        "/images/projects/ravilion/ravilion-4.png",
+        "/images/projects/ravilion/ravilion-5.png",
+      ],
+      techStack: [
+        "Nuxt.js",
+        "HTML",
+        "CSS",
+        "TailwindCss",
       ],
     },
   ];
