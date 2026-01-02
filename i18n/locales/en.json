@@ -1,0 +1,30 @@
+{
+  "menu": {
+    "home": "Home",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "contact": "Get Offer"
+  },
+  "hero": {
+    "title": "Let's Code Your",
+    "subtitle": "Digital Future",
+    "desc": "Grow your business with modern web technologies, AI, and custom software solutions.",
+    "cta": "Get Started"
+  },
+  "services": {
+    "title": "Our Services",
+    "web": "Web Development",
+    "web_desc": "Fast, secure, and modern websites.",
+    "ai": "Artificial Intelligence",
+    "ai_desc": "Smart automations for your business processes.",
+    "mobile": "Mobile App",
+    "mobile_desc": "Native solutions for iOS and Android."
+  },
+  "contact": {
+    "title": "Contact Us",
+    "name": "Full Name",
+    "email": "Email Address",
+    "message": "Your Message",
+    "send": "Send Message"
+  }
+}

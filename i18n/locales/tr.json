@@ -1,0 +1,30 @@
+{
+  "menu": {
+    "home": "Ana Sayfa",
+    "services": "Hizmetler",
+    "portfolio": "Portfolyo",
+    "contact": "Teklif Alın"
+  },
+  "hero": {
+    "title": "Dijital Geleceğinizi",
+    "subtitle": "Birlikte Kodlayalım",
+    "desc": "Modern web teknolojileri, yapay zeka ve özel yazılım çözümleriyle işinizi büyütün.",
+    "cta": "Hemen Başla"
+  },
+  "services": {
+    "title": "Hizmetlerimiz",
+    "web": "Web Geliştirme",
+    "web_desc": "Hızlı, güvenli ve modern web siteleri.",
+    "ai": "Yapay Zeka",
+    "ai_desc": "İş süreçleriniz için akıllı otomasyonlar.",
+    "mobile": "Mobil Uygulama",
+    "mobile_desc": "iOS ve Android için native çözümler."
+  },
+  "contact": {
+    "title": "İletişime Geçin",
+    "name": "Adınız Soyadınız",
+    "email": "E-posta Adresiniz",
+    "message": "Mesajınız",
+    "send": "Gönder"
+  }
+}
