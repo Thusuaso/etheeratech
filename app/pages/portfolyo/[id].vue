@@ -6,6 +6,17 @@ const projects = useProjects();
 const project = computed(() => {
   return projects.find((p) => p.id === route.params.id);
 });
+
+useSeoMeta({
+  title: () => project.value ? project.value.title : 'Proje Detayı',
+  description: () => project.value ? project.value.desc : 'Etheera Tech proje detayları.',
+  ogTitle: () => project.value?.title,
+  ogDescription: () => project.value?.desc,
+  ogImage: () => project.value?.gif // Paylaşımda projenin GIF'i veya resmi görünsün!
+})
+
+
+
 </script>
 
 <template>
