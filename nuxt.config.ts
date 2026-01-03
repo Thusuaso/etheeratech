@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     "@nuxt/icon",
     "@primevue/nuxt-module",
     "@nuxtjs/i18n",
+    "@nuxtjs/seo"
   ],
 
   // 1. Kendi CSS dosyamızı manuel ekliyoruz
@@ -78,7 +79,46 @@ export default defineNuxtConfig({
     telegramBotToken: "8344438429:AAE6n7iD5zoq3tuuR5Zy4zLh9Xu4flv_0BA",
     telegramChatId: "7117895741",
   },
+  site: {
+    url: 'https://etheeratech.com', // Sitenizin tam adresi
+    name: 'Etheera Tech', // Site genel adı
+    description: 'Denizli Yazılım ve Teknoloji Ajansı - Web, Mobil, Yapay Zeka', // Varsayılan açıklama
+    defaultLocale: 'tr', // Varsayılan dil
+  },
 
+  // Sitemap ve Robots ayarları otomatik yapılır ama özelleştirebilirsiniz
+  sitemap: {
+    debug: true,
+    sources: [
+      '/api/__sitemap__/urls' // Dinamik sayfalar için (Gerekirse açarız)
+
+    ],
+    urls: [
+      '/portfolyo/goz-mekmar',
+      '/portfolyo/mekmar-project',
+      '/portfolyo/bulut-project', 
+      '/portfolyo/rast-project' ,
+      '/portfolyo/ravilion-project' ,
+
+      // useProjects.ts'deki "id"leriniz neyse onları buraya yazın
+    ]
+  },
+  nitro: {
+    prerender: {
+      routes: [
+      '/portfolyo/goz-mekmar',
+      '/portfolyo/mekmar-project',
+      '/portfolyo/bulut-project', 
+      '/portfolyo/rast-project' ,
+      '/portfolyo/ravilion-project' ,
+      ]
+    }
+  },
+  
+  // Google'ın sitenizi taramasına izin verin
+  robots: {
+    allow: '/'
+  }
   // i18n: {
   //   lazy: true,
   //   langDir: "locales", // <--- Bu, "locales" klasörüne bak demektir.

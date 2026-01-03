@@ -1,5 +1,13 @@
 <script setup>
 const projects = useProjects() // Verileri çekiyoruz
+useSeoMeta({
+  title: 'Portfolyo',
+  description: 'Etheera Tech ile işletmenizi dijitalleştirin. Web tasarım, mobil uygulama ve yapay zeka çözümleriyle geleceği bugünden yakalayın.',
+  ogTitle: 'Etheera Tech - Dijital Çözüm Ortağınız',
+  ogDescription: 'Web, Mobil ve Yapay Zeka çözümleri.',
+  ogImage: '/images/social-share.png', // WhatsApp/Twitter'da paylaşınca çıkacak resim
+  twitterCard: 'summary_large_image',
+})
 </script>
 
 <template>

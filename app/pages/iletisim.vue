@@ -1,14 +1,16 @@
 <script setup>
-useHead({
-  title: "İletişim & Teklif | Etheera Tech",
-  meta: [
-    {
-      name: "description",
-      content:
-        "Projeniz için fiyat teklifi alın. Etheera Tech ile iletişime geçin.",
-    },
-  ],
-});
+
+useSeoMeta({
+  title: 'İletişim & Teklif',
+  description: 'Etheera Tech ile işletmenizi dijitalleştirin. Projeniz için fiyat teklifi alın. Etheera Tech ile iletişime geçin.',
+  ogTitle: 'Etheera Tech - Dijital Çözüm Ortağınız',
+  ogDescription: 'Web, Mobil ve Yapay Zeka çözümleri.',
+  ogImage: '/images/social-share.png', // WhatsApp/Twitter'da paylaşınca çıkacak resim
+  twitterCard: 'summary_large_image',
+})
+
+
+
 const toast = useToast();
 // Form Verileri
 const form = reactive({
