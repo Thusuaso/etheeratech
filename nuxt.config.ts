@@ -8,7 +8,8 @@ export default defineNuxtConfig({
     "@nuxt/icon",
     "@primevue/nuxt-module",
     "@nuxtjs/i18n",
-    "@nuxtjs/seo"
+    "@nuxtjs/seo",
+    'nuxt-gtag'
   ],
 
   // 1. Kendi CSS dosyamızı manuel ekliyoruz
@@ -118,6 +119,9 @@ export default defineNuxtConfig({
   // Google'ın sitenizi taramasına izin verin
   robots: {
     allow: '/'
+  },
+  gtag: {
+    id: 'G-Q6DPD4YH1Y' // Buraya kendi kodunuzu yapıştırın
   }
   // i18n: {
   //   lazy: true,
