@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     "@primevue/nuxt-module",
     "@nuxtjs/i18n",
     "@nuxtjs/seo",
-    'nuxt-gtag'
+    "nuxt-gtag",
   ],
 
   // 1. Kendi CSS dosyamızı manuel ekliyoruz
@@ -71,7 +71,14 @@ export default defineNuxtConfig({
           rel: "stylesheet",
           href: "https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap",
         },
-        { rel: "icon", type: "image/png", href: "/favicon.png" },
+        { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+        {
+          rel: "icon",
+          type: "image/png",
+          sizes: "192x192",
+          href: "/favicon.png",
+        },
+        { rel: "apple-touch-icon", href: "/favicon.png" }, // Apple cihazlar için
       ],
     },
   },
@@ -81,48 +88,47 @@ export default defineNuxtConfig({
     telegramChatId: "7117895741",
   },
   site: {
-    url: 'https://etheeratech.com', // Sitenizin tam adresi
-    name: 'Etheera Tech', // Site genel adı
-    description: 'Denizli Yazılım ve Teknoloji Ajansı - Web, Mobil, Yapay Zeka', // Varsayılan açıklama
-    defaultLocale: 'tr', // Varsayılan dil
+    url: "https://etheeratech.com", // Sitenizin tam adresi
+    name: "Etheera Tech", // Site genel adı
+    description: "Denizli Yazılım ve Teknoloji Ajansı - Web, Mobil, Yapay Zeka", // Varsayılan açıklama
+    defaultLocale: "tr", // Varsayılan dil
   },
 
   // Sitemap ve Robots ayarları otomatik yapılır ama özelleştirebilirsiniz
   sitemap: {
     debug: true,
     sources: [
-      '/api/__sitemap__/urls' // Dinamik sayfalar için (Gerekirse açarız)
-
+      "/api/__sitemap__/urls", // Dinamik sayfalar için (Gerekirse açarız)
     ],
     urls: [
-      '/portfolyo/goz-mekmar',
-      '/portfolyo/mekmar-project',
-      '/portfolyo/bulut-project', 
-      '/portfolyo/rast-project' ,
-      '/portfolyo/ravilion-project' ,
+      "/portfolyo/goz-mekmar",
+      "/portfolyo/mekmar-project",
+      "/portfolyo/bulut-project",
+      "/portfolyo/rast-project",
+      "/portfolyo/ravilion-project",
 
       // useProjects.ts'deki "id"leriniz neyse onları buraya yazın
-    ]
+    ],
   },
   nitro: {
     prerender: {
       routes: [
-      '/portfolyo/goz-mekmar',
-      '/portfolyo/mekmar-project',
-      '/portfolyo/bulut-project', 
-      '/portfolyo/rast-project' ,
-      '/portfolyo/ravilion-project' ,
-      ]
-    }
+        "/portfolyo/goz-mekmar",
+        "/portfolyo/mekmar-project",
+        "/portfolyo/bulut-project",
+        "/portfolyo/rast-project",
+        "/portfolyo/ravilion-project",
+      ],
+    },
   },
-  
+
   // Google'ın sitenizi taramasına izin verin
   robots: {
-    allow: '/'
+    allow: "/",
   },
   gtag: {
-    id: 'G-Q6DPD4YH1Y' // Buraya kendi kodunuzu yapıştırın
-  }
+    id: "G-Q6DPD4YH1Y", // Buraya kendi kodunuzu yapıştırın
+  },
   // i18n: {
   //   lazy: true,
   //   langDir: "locales", // <--- Bu, "locales" klasörüne bak demektir.
