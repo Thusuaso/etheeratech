@@ -1,5 +1,6 @@
 // nuxt.config.ts
 import Aura from "@primevue/themes/aura";
+
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
@@ -12,16 +13,16 @@ export default defineNuxtConfig({
     "nuxt-gtag",
   ],
 
-  // 1. Kendi CSS dosyamızı manuel ekliyoruz
   css: ["~/assets/css/main.css"],
+
   primevue: {
     options: {
-      ripple: true, // Tıklama efekti
+      ripple: true,
       inputVariant: "filled",
       theme: {
-        preset: Aura, // Aura teması (Modern ve yuvarlak hatlı)
+        preset: Aura,
         options: {
-          darkModeSelector: "system", // Sistem moduna göre veya '.dark' sınıfına göre
+          darkModeSelector: "system",
           cssLayer: {
             name: "primevue",
             order: "tailwind-base, primevue, tailwind-utilities",
@@ -30,31 +31,23 @@ export default defineNuxtConfig({
       },
     },
   },
-  // 2. Tailwind varsayılan CSS'ini KAPATIYORUZ (Çakışmayı önler)
+
   tailwindcss: {
     cssPath: false,
     configPath: "tailwind.config.js",
     viewer: true,
   },
+
   icon: {
     serverBundle: {
-      collections: ["heroicons"], // Sadece kullandığımız paketi sunucuda derle
+      collections: ["heroicons"],
     },
   },
-  // 3. VITE GÜVENLİK DUVARI AYARI (Hatanın Çözümü)
+
   vite: {
     server: {
       fs: {
-        // İzin verilen erişim listesini genişletiyoruz.
-        // Projenizin bulunduğu ana klasörü buraya ekliyoruz.
-        allow: [
-          // Projenin çalıştığı mevcut dizin
-          ".",
-          // Üst dizinler (node_modules erişimi için)
-          "..",
-          // D Sürücüsündeki Projects klasörü (Hata mesajındaki yol)
-          "D:/Projects",
-        ],
+        allow: [".", "..", "D:/Projects"],
       },
     },
   },
@@ -76,43 +69,48 @@ export default defineNuxtConfig({
           rel: "icon",
           type: "image/png",
           sizes: "192x192",
-          href: "/logo-v2.png",
+          href: "/logo-v2.png", // Önceki konuşmamızdaki logo adı
         },
-        { rel: "apple-touch-icon", href: "/logo-v2.png" }, // Apple cihazlar için
+        { rel: "apple-touch-icon", href: "/logo-v2.png" },
       ],
     },
   },
+
+  // GÜVENLİK AYARI: Değerleri .env dosyasından çekecek
   runtimeConfig: {
-    // Bu değişkenler sadece sunucu tarafında (server) okunabilir, güvenlidir.
-    telegramBotToken: "8344438429:AAE6n7iD5zoq3tuuR5Zy4zLh9Xu4flv_0BA",
-    telegramChatId: "7117895741",
-  },
-  site: {
-    url: "https://etheeratech.com", // Sitenizin tam adresi
-    name: "Etheera Tech", // Site genel adı
-    description: "Denizli Yazılım ve Teknoloji Ajansı - Web, Mobil, Yapay Zeka", // Varsayılan açıklama
-    defaultLocale: "tr", // Varsayılan dil
+    telegramBotToken: process.env.NUXT_TELEGRAM_BOT_TOKEN, 
+    telegramChatId: process.env.NUXT_TELEGRAM_CHAT_ID,
   },
 
-  // Sitemap ve Robots ayarları otomatik yapılır ama özelleştirebilirsiniz
+  site: {
+    url: "https://etheeratech.com",
+    name: "Etheera Tech",
+    description: "Denizli Yazılım ve Teknoloji Ajansı - Web, Mobil, Yapay Zeka",
+    defaultLocale: "tr",
+  },
+
+  // SITEMAP AYARLARI
   sitemap: {
-    debug: true,
-    sources: [
-      "/api/__sitemap__/urls", // Dinamik sayfalar için (Gerekirse açarız)
-    ],
+    // Manuel eklediğin linkler buraya
     urls: [
       "/portfolyo/goz-mekmar",
       "/portfolyo/mekmar-project",
       "/portfolyo/bulut-project",
       "/portfolyo/rast-project",
       "/portfolyo/ravilion-project",
-
-      // useProjects.ts'deki "id"leriniz neyse onları buraya yazın
     ],
+    defaults: {
+        priority: 0.8,
+        changefreq: 'monthly'
+    }
   },
+
+  // STATIC GENERATE AYARLARI (npm run generate için KRİTİK)
   nitro: {
     prerender: {
+      // Bu sayfaları build sırasında oluşturup HTML'e çevirir
       routes: [
+        "/sitemap.xml", // Sitemap'in oluşması için bunu eklemek iyidir
         "/portfolyo/goz-mekmar",
         "/portfolyo/mekmar-project",
         "/portfolyo/bulut-project",
@@ -122,31 +120,11 @@ export default defineNuxtConfig({
     },
   },
 
-  // Google'ın sitenizi taramasına izin verin
   robots: {
     allow: "/",
   },
+
   gtag: {
-    id: "G-Q6DPD4YH1Y", // Buraya kendi kodunuzu yapıştırın
+    id: "G-Q6DPD4YH1Y",
   },
-  // i18n: {
-  //   lazy: true,
-  //   langDir: "locales", // <--- Bu, "locales" klasörüne bak demektir.
-  //   strategy: "prefix_except_default",
-  //   defaultLocale: "tr",
-  //   locales: [
-  //     {
-  //       code: "tr",
-  //       iso: "tr-TR",
-  //       name: "Turkish",
-  //       file: "tr.json", // <--- locales/tr.json dosyasını arar
-  //     },
-  //     {
-  //       code: "en",
-  //       iso: "en-US",
-  //       name: "English",
-  //       file: "en.json", // <--- locales/en.json dosyasını arar
-  //     },
-  //   ],
-  // },
 });
