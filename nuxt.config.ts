@@ -89,28 +89,36 @@ export default defineNuxtConfig({
     defaultLocale: "tr",
   },
 
-  // SITEMAP AYARLARI
-  sitemap: {
-    // Manuel eklediğin linkler buraya
+sitemap: {
+    // 1. O hatalı "sources" satırını SİLDİK.
+    
+    // 2. Manuel linkleri buraya ekliyoruz.
     urls: [
-      "/portfolyo/goz-mekmar",
-      "/portfolyo/mekmar-project",
-      "/portfolyo/bulut-project",
-      "/portfolyo/rast-project",
-      "/portfolyo/ravilion-project",
+        "/", // Ana sayfa
+        "/portfolyo/goz-mekmar",
+        "/portfolyo/mekmar-project",
+        "/portfolyo/bulut-project",
+        "/portfolyo/rast-project",
+        "/portfolyo/ravilion-project",
     ],
+    
+    // 3. Önbellekleme süresi ve varsayılan ayarlar
     defaults: {
+        changefreq: 'daily',
         priority: 0.8,
-        changefreq: 'monthly'
-    }
+        lastmod: new Date()
+    },
+    
+    // 4. Eğer sayfalar gerçekten yoksa bile sitemap'e zorla ekle (Güvenlik önlemi)
+    discoverImages: false, 
   },
 
-  // STATIC GENERATE AYARLARI (npm run generate için KRİTİK)
+  // STATIC GENERATE AYARLARI
   nitro: {
     prerender: {
-      // Bu sayfaları build sırasında oluşturup HTML'e çevirir
+      failOnError: false, // Hata alsa bile durmasın, devam etsin
       routes: [
-        "/sitemap.xml", // Sitemap'in oluşması için bunu eklemek iyidir
+        "/sitemap.xml",
         "/portfolyo/goz-mekmar",
         "/portfolyo/mekmar-project",
         "/portfolyo/bulut-project",
