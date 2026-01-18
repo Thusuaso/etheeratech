@@ -76,9 +76,9 @@ export default defineNuxtConfig({
           rel: "icon",
           type: "image/png",
           sizes: "192x192",
-          href: "/favicon.png",
+          href: "/logo-v2.png",
         },
-        { rel: "apple-touch-icon", href: "/favicon.png" }, // Apple cihazlar için
+        { rel: "apple-touch-icon", href: "/logo-v2.png" }, // Apple cihazlar için
       ],
     },
   },
