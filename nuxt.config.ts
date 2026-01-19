@@ -88,6 +88,7 @@ export default defineNuxtConfig({
     description: "Denizli Yazılım ve Teknoloji Ajansı - Web, Mobil, Yapay Zeka",
     defaultLocale: "tr",
     indexable: true,
+    trailingSlash: false,
   },
 
   sitemap: {
@@ -95,27 +96,33 @@ export default defineNuxtConfig({
     debug: true,
     // XML dosyasının sıkıştırılmamış halini de üret (kontrol için)
     xsl: false,
+    sitemaps: false,
     // Linkleri buraya MANUEL ve KESİN olarak yazıyoruz
-    urls: async () => {
-      return [
-        "/",
-        "/portfolyo/goz-mekmar",
-        "/portfolyo/mekmar-project",
-        "/portfolyo/bulut-project",
-        "/portfolyo/rast-project",
-        "/portfolyo/ravilion-project",
-      ];
+    urls: [
+      "/",
+      "/portfolyo/goz-mekmar",
+      "/portfolyo/mekmar-project",
+      "/portfolyo/bulut-project",
+      "/portfolyo/rast-project",
+      "/portfolyo/ravilion-project",
+    ],
+
+    // Google'ın sevdiği standart ayarlar
+    defaults: {
+      changefreq: "daily",
+      priority: 0.8,
+      lastmod: new Date(),
     },
   },
 
   // Statik üretim ayarları
   nitro: {
     prerender: {
-      crawlLinks: true, // Sayfa içindeki linkleri de takip et
+      crawlLinks: true,
       routes: [
         "/",
         "/sitemap.xml",
-        // Buraya portfolyo linklerini tekrar yazmana gerek yok, sitemap modülü halledecek
+        // Buraya tekrar uzun uzun linkleri yazmana gerek yok, üstteki sitemap ayarı yeterli.
       ],
     },
   },
