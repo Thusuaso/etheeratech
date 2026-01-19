@@ -78,7 +78,7 @@ export default defineNuxtConfig({
 
   // GÜVENLİK AYARI: Değerleri .env dosyasından çekecek
   runtimeConfig: {
-    telegramBotToken: process.env.NUXT_TELEGRAM_BOT_TOKEN, 
+    telegramBotToken: process.env.NUXT_TELEGRAM_BOT_TOKEN,
     telegramChatId: process.env.NUXT_TELEGRAM_CHAT_ID,
   },
 
@@ -87,43 +87,35 @@ export default defineNuxtConfig({
     name: "Etheera Tech",
     description: "Denizli Yazılım ve Teknoloji Ajansı - Web, Mobil, Yapay Zeka",
     defaultLocale: "tr",
+    indexable: true,
   },
 
-sitemap: {
-    // 1. O hatalı "sources" satırını SİLDİK.
-    
-    // 2. Manuel linkleri buraya ekliyoruz.
-    urls: [
-        "/", // Ana sayfa
+  sitemap: {
+    // Debug modunu açalım, terminalde hata varsa görelim
+    debug: true,
+    // XML dosyasının sıkıştırılmamış halini de üret (kontrol için)
+    xsl: false,
+    // Linkleri buraya MANUEL ve KESİN olarak yazıyoruz
+    urls: async () => {
+      return [
+        "/",
         "/portfolyo/goz-mekmar",
         "/portfolyo/mekmar-project",
         "/portfolyo/bulut-project",
         "/portfolyo/rast-project",
         "/portfolyo/ravilion-project",
-    ],
-    
-    // 3. Önbellekleme süresi ve varsayılan ayarlar
-    defaults: {
-        changefreq: 'daily',
-        priority: 0.8,
-        lastmod: new Date()
+      ];
     },
-    
-    // 4. Eğer sayfalar gerçekten yoksa bile sitemap'e zorla ekle (Güvenlik önlemi)
-    discoverImages: false, 
   },
 
-  // STATIC GENERATE AYARLARI
+  // Statik üretim ayarları
   nitro: {
     prerender: {
-      failOnError: false, // Hata alsa bile durmasın, devam etsin
+      crawlLinks: true, // Sayfa içindeki linkleri de takip et
       routes: [
+        "/",
         "/sitemap.xml",
-        "/portfolyo/goz-mekmar",
-        "/portfolyo/mekmar-project",
-        "/portfolyo/bulut-project",
-        "/portfolyo/rast-project",
-        "/portfolyo/ravilion-project",
+        // Buraya portfolyo linklerini tekrar yazmana gerek yok, sitemap modülü halledecek
       ],
     },
   },
