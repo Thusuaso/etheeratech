@@ -1,11 +1,10 @@
 // composables/useProjects.ts
-
 export const useProjects = () => {
   return [
     {
       id: "goz-mekmar",
-      title: "Şirket İçi Portal",
-      desc: "İnşaat sektöründe faaliyet gösteren bir firma için geliştirilmiş, proje yönetimi, doküman paylaşımı ve ekip iletişimini sağlayan şirket içi portal uygulaması.",
+      title: "Internal Company Portal",
+      desc: "A custom internal portal built for a construction company, featuring project management, document sharing, and real-time team communication.",
       gif: "/images/projects/goz/goz-gif.gif",
       images: [
         "/images/projects/goz/goz-1.png",
@@ -26,13 +25,13 @@ export const useProjects = () => {
         "CSS",
         "Bootstrap",
         "Socket.io",
-        "PrimeVue"
+        "PrimeVue",
       ],
     },
     {
       id: "mekmar-project",
-      title: "Mermer Şirketi Web Sitesi",
-      desc: "Mermer sektöründe faaliyet gösteren bir firma için geliştirilmiş, ürün katalogları, proje referansları ve iletişim bilgilerini içeren kurumsal web sitesi.",
+      title: "Marble Company Website",
+      desc: "A corporate website developed for a natural stone and marble company, showcasing product catalogues, project references, and contact information.",
       gif: "/images/projects/mekmar/mekmar-gif.gif",
       images: [
         "/images/projects/mekmar/mekmar-1.png",
@@ -41,17 +40,12 @@ export const useProjects = () => {
         "/images/projects/mekmar/mekmar-4.png",
         "/images/projects/mekmar/mekmar-5.png",
       ],
-      techStack: [
-        "Nuxt.js",
-        "HTML",
-        "CSS",
-        "Bootstrap",
-      ],
+      techStack: ["Nuxt.js", "HTML", "CSS", "Bootstrap"],
     },
     {
       id: "bulut-project",
-      title: "Otel İşletmesi Web Sitesi",
-      desc: "Otel sektöründe faaliyet gösteren bir firma için geliştirilmiştir, reklam, iletişim ve randevu alma sistemini içeren kurumsal bir web sitesi.",
+      title: "Hotel Business Website",
+      desc: "A corporate website built for a hotel business, featuring promotional content, contact details, and an online appointment booking system.",
       gif: "/images/projects/bulut/bulut-gif.gif",
       images: [
         "/images/projects/bulut/bulut-1.png",
@@ -60,17 +54,12 @@ export const useProjects = () => {
         "/images/projects/bulut/bulut-4.png",
         "/images/projects/bulut/bulut-5.png",
       ],
-      techStack: [
-        "Nuxt.js",
-        "HTML",
-        "CSS",
-        "TailwindCss",
-      ],
+      techStack: ["Nuxt.js", "HTML", "CSS", "TailwindCSS"],
     },
     {
       id: "rast-project",
-      title: "Kuaför İşletmesi Web Sitesi",
-      desc: "Kuaför sektöründe faaliyet gösteren bir firma için geliştirilmiştir, reklam, iletişim ve randevu alma sistemini içeren kurumsal bir web sitesi.",
+      title: "Hair Salon Website",
+      desc: "A corporate website developed for a hair salon, including promotional pages, contact information, and an online appointment scheduling system.",
       gif: "/images/projects/rast/rast-gif.gif",
       images: [
         "/images/projects/rast/rast-1.png",
@@ -79,17 +68,12 @@ export const useProjects = () => {
         "/images/projects/rast/rast-4.png",
         "/images/projects/rast/rast-5.png",
       ],
-      techStack: [
-        "Nuxt.js",
-        "HTML",
-        "CSS",
-        "TailwindCss",
-      ],
+      techStack: ["Nuxt.js", "HTML", "CSS", "TailwindCSS"],
     },
-        {
+    {
       id: "ravilion-project",
-      title: "Tekstil Firması Web Sitesi",
-      desc: "Tekstil sektöründe faaliyet gösteren bir firma için geliştirilmiştir, reklam, iletişim, fiyat alma ve satın alma sistemini içeren kurumsal bir web sitesi.",
+      title: "Textile Company Website",
+      desc: "A corporate website built for a textile manufacturer, featuring product promotions, contact forms, quote requests, and an integrated purchasing flow.",
       gif: "/images/projects/ravilion/ravilion-gif.gif",
       images: [
         "/images/projects/ravilion/ravilion-1.png",
@@ -98,12 +82,7 @@ export const useProjects = () => {
         "/images/projects/ravilion/ravilion-4.png",
         "/images/projects/ravilion/ravilion-5.png",
       ],
-      techStack: [
-        "Nuxt.js",
-        "HTML",
-        "CSS",
-        "TailwindCss",
-      ],
+      techStack: ["Nuxt.js", "HTML", "CSS", "TailwindCSS"],
     },
   ];
 };

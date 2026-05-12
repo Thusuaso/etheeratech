@@ -15,6 +15,11 @@ export default defineNuxtConfig({
 
   css: ["~/assets/css/main.css"],
 
+  // SSR inline style inject'ini kapat — entry CSS blocking'i azaltır
+  experimental: {
+    inlineSSRStyles: false,
+  },
+
   primevue: {
     options: {
       ripple: true,
@@ -45,6 +50,16 @@ export default defineNuxtConfig({
   },
 
   vite: {
+    build: {
+      cssCodeSplit: true,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vendor: ["vue", "vue-router"],
+          },
+        },
+      },
+    },
     server: {
       fs: {
         allow: [".", "..", "D:/Projects"],
@@ -55,28 +70,142 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: "Etheera Tech",
+      htmlAttrs: {
+        lang: "en",
+      },
       meta: [
         { name: "viewport", content: "width=device-width, initial-scale=1" },
         { charset: "utf-8" },
+        {
+          name: "description",
+          content:
+            "Etheera Tech is a full-service digital agency based in Denizli, Turkey. We build web apps, e-commerce stores, automation bots, and AI-powered solutions for clients worldwide.",
+        },
+        // Open Graph
+        { property: "og:type", content: "website" },
+        { property: "og:site_name", content: "Etheera Tech" },
+        { property: "og:locale", content: "en_US" },
+        {
+          property: "og:image",
+          content: "https://etheeratech.com/images/social-share.png",
+        },
+        { property: "og:image:width", content: "1200" },
+        { property: "og:image:height", content: "630" },
+        // Twitter
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:site", content: "@etheeratech" },
+        {
+          name: "twitter:image",
+          content: "https://etheeratech.com/images/social-share.png",
+        },
+        // Geo / Local SEO
+        { name: "geo.region", content: "TR-20" },
+        { name: "geo.placename", content: "Denizli" },
+        { name: "geo.position", content: "37.7765;29.0864" },
+        { name: "ICBM", content: "37.7765, 29.0864" },
       ],
       link: [
+        // Google Fonts — preconnect ile DNS'i önceden çöz
+        {
+          rel: "preconnect",
+          href: "https://fonts.googleapis.com",
+        },
+        {
+          rel: "preconnect",
+          href: "https://fonts.gstatic.com",
+          crossorigin: "anonymous",
+        },
+        // Fontu render blocking olmaktan çıkar
+        {
+          rel: "preload",
+          as: "style",
+          href: "https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap",
+          onload: "this.onload=null;this.rel='stylesheet'",
+        },
+        // JS kapalı tarayıcılar için fallback (noscript eşdeğeri)
         {
           rel: "stylesheet",
           href: "https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap",
+          media: "print",
+          onload: "this.media='all'",
         },
+        { rel: "canonical", href: "https://etheeratech.com" },
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
         {
           rel: "icon",
           type: "image/png",
           sizes: "192x192",
-          href: "/logo-v2.png", // Önceki konuşmamızdaki logo adı
+          href: "/logo-v2.png",
         },
         { rel: "apple-touch-icon", href: "/logo-v2.png" },
+      ],
+      script: [
+        // Organization schema — Google Knowledge Panel
+        {
+          type: "application/ld+json",
+          innerHTML: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "Etheera Tech",
+            url: "https://etheeratech.com",
+            logo: "https://etheeratech.com/logo-v2.png",
+            description:
+              "Full-service digital agency based in Denizli, Turkey. Web apps, e-commerce, automation, and AI solutions.",
+            email: "info@etheeratech.com",
+            telephone: "+90-553-025-70-11",
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: "Sanayi Mah. No:1",
+              addressLocality: "Denizli",
+              addressRegion: "TR-20",
+              addressCountry: "TR",
+            },
+            sameAs: ["https://www.instagram.com/etheera.tech/"],
+          }),
+        },
+        // LocalBusiness schema — yerel SEO
+        {
+          type: "application/ld+json",
+          innerHTML: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            name: "Etheera Tech",
+            image: "https://etheeratech.com/images/social-share.png",
+            url: "https://etheeratech.com",
+            telephone: "+90-553-025-70-11",
+            email: "info@etheeratech.com",
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: "Teknopark, Sanayi Mah. No:1",
+              addressLocality: "Denizli",
+              addressRegion: "Denizli",
+              postalCode: "20160",
+              addressCountry: "TR",
+            },
+            geo: {
+              "@type": "GeoCoordinates",
+              latitude: 37.7765,
+              longitude: 29.0864,
+            },
+            openingHoursSpecification: {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+              ],
+              opens: "09:00",
+              closes: "18:00",
+            },
+            priceRange: "$$",
+          }),
+        },
       ],
     },
   },
 
-  // GÜVENLİK AYARI: Değerleri .env dosyasından çekecek
   runtimeConfig: {
     telegramBotToken: process.env.NUXT_TELEGRAM_BOT_TOKEN,
     telegramChatId: process.env.NUXT_TELEGRAM_CHAT_ID,
@@ -85,50 +214,64 @@ export default defineNuxtConfig({
   site: {
     url: "https://etheeratech.com",
     name: "Etheera Tech",
-    description: "Denizli Yazılım ve Teknoloji Ajansı - Web, Mobil, Yapay Zeka",
-    defaultLocale: "tr",
+    description:
+      "Full-service digital agency based in Denizli, Turkey. We build web apps, e-commerce stores, automation bots, and AI-powered solutions for clients worldwide.",
+    defaultLocale: "en",
     indexable: true,
     trailingSlash: false,
   },
 
   sitemap: {
-    // Debug modunu açalım, terminalde hata varsa görelim
-    debug: true,
-    // XML dosyasının sıkıştırılmamış halini de üret (kontrol için)
+    debug: false,
     xsl: false,
     sitemaps: false,
-    // Linkleri buraya MANUEL ve KESİN olarak yazıyoruz
     urls: [
-      "/",
-      "/portfolyo/goz-mekmar",
-      "/portfolyo/mekmar-project",
-      "/portfolyo/bulut-project",
-      "/portfolyo/rast-project",
-      "/portfolyo/ravilion-project",
+      { loc: "/", priority: 1.0, changefreq: "weekly" },
+      { loc: "/portfolio", priority: 0.9, changefreq: "weekly" },
+      { loc: "/contact", priority: 0.9, changefreq: "monthly" },
+      { loc: "/start", priority: 0.8, changefreq: "monthly" },
+      { loc: "/portfolio/goz-mekmar", priority: 0.7, changefreq: "monthly" },
+      {
+        loc: "/portfolio/mekmar-project",
+        priority: 0.7,
+        changefreq: "monthly",
+      },
+      { loc: "/portfolio/bulut-project", priority: 0.7, changefreq: "monthly" },
+      { loc: "/portfolio/rast-project", priority: 0.7, changefreq: "monthly" },
+      {
+        loc: "/portfolio/ravilion-project",
+        priority: 0.7,
+        changefreq: "monthly",
+      },
     ],
-
-    // Google'ın sevdiği standart ayarlar
     defaults: {
-      changefreq: "daily",
-      priority: 0.8,
       lastmod: new Date(),
     },
   },
 
-  // Statik üretim ayarları
   nitro: {
+    preset: "cloudflare_pages",
+    cloudflare: {
+      wrangler: {
+        compatibility_date: "2025-01-01",
+      },
+    },
     prerender: {
       crawlLinks: true,
-      routes: [
-        "/",
-        "/sitemap.xml",
-        // Buraya tekrar uzun uzun linkleri yazmana gerek yok, üstteki sitemap ayarı yeterli.
+      failOnError: false, // ← hata olsa bile build devam etsin
+      ignore: [
+        "/portfolio/**", // ← payload hatasını tetikleyen route'ları ignore et
       ],
+      routes: ["/", "/portfolio", "/contact", "/start", "/sitemap.xml"],
     },
+  },
+  routeRules: {
+    "/**": { cache: { maxAge: 60 * 60 * 24 } },
   },
 
   robots: {
     allow: "/",
+    disallow: ["/api/"],
   },
 
   gtag: {

@@ -1,50 +1,51 @@
 <script setup>
 useSeoMeta({
-  title: 'Ana Sayfa',
-  description: 'Etheera Tech ile işletmenizi dijitalleştirin. Web tasarım, mobil uygulama ve yapay zeka çözümleriyle geleceği bugünden yakalayın.',
-  ogTitle: 'Etheera Tech - Dijital Çözüm Ortağınız',
-  ogDescription: 'Web, Mobil ve Yapay Zeka çözümleri.',
-  ogImage: '/images/social-share.png', // WhatsApp/Twitter'da paylaşınca çıkacak resim
+  title: 'Home',
+  description: 'Etheera Tech builds high-performance web apps, e-commerce stores, automation bots, and AI-powered digital experiences. Based in Turkey, serving clients worldwide.',
+  ogTitle: 'Etheera Tech — Web Design, Development & Automation Agency',
+  ogDescription: 'Nuxt & Vue development, UI/UX design, e-commerce, SEO, and custom automation solutions.',
+  ogImage: '/images/social-share.png',
   twitterCard: 'summary_large_image',
 })
+
 const services = [
   {
-    title: "UI/UX Tasarım",
-    desc: "Kullanıcı dostu, estetik ve markanızı yansıtan modern arayüz tasarımları.",
+    title: "UI/UX Design",
+    desc: "Clean, modern interfaces that reflect your brand and keep users engaged from the first click.",
     icon: "heroicons:paint-brush",
     color: "text-purple-400",
   },
   {
-    title: "Nuxt & Vue Geliştirme",
-    desc: "Yüksek performanslı, SEO uyumlu ve ölçeklenebilir modern web uygulamaları.",
+    title: "Nuxt & Vue Development",
+    desc: "Fast, SEO-friendly, and scalable web applications built with the latest Vue ecosystem.",
     icon: "heroicons:code-bracket",
     color: "text-cyan-400",
   },
   {
-    title: "E-Ticaret Çözümleri",
-    desc: "Satışlarınızı artıracak, güvenli ödeme altyapısına sahip mağazalar.",
+    title: "E-Commerce Solutions",
+    desc: "Custom storefronts with secure payment infrastructure designed to convert visitors into customers.",
     icon: "heroicons:shopping-cart",
     color: "text-emerald-400",
   },
   {
-    title: "SEO & Performans",
-    desc: "Google aramalarında en üstte çıkın. Işık hızında açılan ve optimize edilmiş siteler.",
-    icon: "heroicons:presentation-chart-line", // Yükselen grafik ikonu
+    title: "SEO & Performance",
+    desc: "Rank higher on Google with lightning-fast, fully optimized sites built for Core Web Vitals.",
+    icon: "heroicons:presentation-chart-line",
     color: "text-orange-400",
   },
   {
-    title: "Bot & Otomasyon",
-    desc: "Telegram botları, Web Scraping ve iş yükünüzü hafifleten özel yazılımlar.",
-    icon: "heroicons:cpu-chip", // Çip/Robot ikonu
+    title: "Bots & Automation",
+    desc: "Telegram bots, web scraping pipelines, and custom scripts that eliminate repetitive work.",
+    icon: "heroicons:cpu-chip",
     color: "text-rose-400",
   },
   {
-    title: "Dijital Danışmanlık",
-    desc: "Projeniz için en doğru teknolojiyi ve stratejiyi belirlemenizde yanınızdayız.",
-    icon: "heroicons:light-bulb", // Fikir ikonu
+    title: "Digital Consulting",
+    desc: "Not sure where to start? We help you pick the right tech stack and strategy for your project.",
+    icon: "heroicons:light-bulb",
     color: "text-yellow-400",
   },
-];
+]
 </script>
 
 <template>
@@ -56,41 +57,39 @@ const services = [
         <div
           class="inline-block px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold tracking-wide uppercase mb-4"
         >
-          🚀 Dijital Dönüşüm Başlasın
+          🚀 Your Digital Transformation Starts Here
         </div>
 
         <h1 class="text-5xl lg:text-7xl font-extrabold leading-tight">
-          Dijital Vizyonunuzu <br />
+          Turn Your Digital Vision <br />
           <span
             class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500"
           >
-            Gerçeğe Dönüştürün
+            Into Reality
           </span>
         </h1>
 
-        <p
-          class="text-slate-400 text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed"
-        >
-          Etheera Tech ile sınırları zorlayın. Markanız için sadece bir web
-          sitesi değil, yaşayan dijital bir deneyim tasarlıyoruz.
+        <p class="text-slate-400 text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed">
+          We don't just build websites — we craft living digital experiences
+          that grow with your brand. Push boundaries with Etheera Tech.
         </p>
 
         <div
           class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4"
         >
-          <NuxtLink to="/basla">
+          <NuxtLink to="/start">
             <button
               class="px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-bold shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/50 transition-all"
             >
-              Projemi Başlat
+              Start My Project
             </button>
           </NuxtLink>
-          <NuxtLink to="/portfolyo">
+          <NuxtLink to="/portfolio">
             <button
               class="px-8 py-4 rounded-xl border border-slate-700 text-slate-300 hover:bg-white/5 hover:text-white hover:border-white transition-all flex items-center justify-center gap-2"
             >
               <Icon name="heroicons:squares-2x2" size="24" />
-              İşlerimizi Gör
+              View Our Work
             </button>
           </NuxtLink>
         </div>
@@ -119,7 +118,7 @@ const services = [
                 >createAmazingWeb</span
               >();
             </p>
-            <p class="text-slate-500">// Sonuç: Mükemmel Performans ⚡</p>
+            <p class="text-slate-500">// Result: Peak Performance ⚡</p>
           </div>
         </div>
       </div>
@@ -127,9 +126,9 @@ const services = [
 
     <section id="services" class="container mx-auto px-6 mt-32">
       <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4">Neler Yapıyoruz?</h2>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">What We Do</h2>
         <p class="text-slate-400">
-          Sadece kod yazmıyoruz, işinize değer katıyoruz.
+          We don't just write code — we build value into your business.
         </p>
       </div>
 
@@ -145,9 +144,7 @@ const services = [
             <Icon :name="service.icon" size="32" :class="service.color" />
           </div>
           <h3 class="text-xl font-bold mb-3 text-white">{{ service.title }}</h3>
-          <p class="text-slate-400 leading-relaxed">
-            {{ service.desc }}
-          </p>
+          <p class="text-slate-400 leading-relaxed">{{ service.desc }}</p>
         </div>
       </div>
     </section>
