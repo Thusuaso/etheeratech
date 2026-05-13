@@ -7,6 +7,7 @@ export default defineNuxtConfig({
   modules: [
     "@nuxtjs/tailwindcss",
     "@nuxt/icon",
+    "@nuxt/fonts",
     "@primevue/nuxt-module",
     "@nuxtjs/seo",
     "nuxt-gtag",
@@ -14,10 +15,13 @@ export default defineNuxtConfig({
 
   css: ["~/assets/css/main.css"],
 
-  // SSR inline style inject'ini kapat — entry CSS blocking'i azaltır
   experimental: {
     inlineSSRStyles: false,
     renderJsonPayloads: true,
+  },
+
+  fonts: {
+    families: [{ name: "Outfit", weights: [300, 400, 600, 700] }],
   },
 
   primevue: {
@@ -81,7 +85,6 @@ export default defineNuxtConfig({
           content:
             "Etheera Tech is a full-service digital agency based in Denizli, Turkey. We build web apps, e-commerce stores, automation bots, and AI-powered solutions for clients worldwide.",
         },
-        // Open Graph
         { property: "og:type", content: "website" },
         { property: "og:site_name", content: "Etheera Tech" },
         { property: "og:locale", content: "en_US" },
@@ -91,44 +94,18 @@ export default defineNuxtConfig({
         },
         { property: "og:image:width", content: "1200" },
         { property: "og:image:height", content: "630" },
-        // Twitter
         { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:site", content: "@etheeratech" },
         {
           name: "twitter:image",
           content: "https://etheeratech.com/images/social-share.png",
         },
-        // Geo / Local SEO
         { name: "geo.region", content: "TR-20" },
         { name: "geo.placename", content: "Denizli" },
         { name: "geo.position", content: "37.7765;29.0864" },
         { name: "ICBM", content: "37.7765, 29.0864" },
       ],
       link: [
-        // Google Fonts — preconnect ile DNS'i önceden çöz
-        {
-          rel: "preconnect",
-          href: "https://fonts.googleapis.com",
-        },
-        {
-          rel: "preconnect",
-          href: "https://fonts.gstatic.com",
-          crossorigin: "anonymous",
-        },
-        // Fontu render blocking olmaktan çıkar
-        {
-          rel: "preload",
-          as: "style",
-          href: "https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap",
-          onload: "this.onload=null;this.rel='stylesheet'",
-        },
-        // JS kapalı tarayıcılar için fallback (noscript eşdeğeri)
-        {
-          rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap",
-          media: "print",
-          onload: "this.media='all'",
-        },
         { rel: "canonical", href: "https://etheeratech.com" },
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
         {
@@ -140,7 +117,6 @@ export default defineNuxtConfig({
         { rel: "apple-touch-icon", href: "/logo-v2.png" },
       ],
       script: [
-        // Organization schema — Google Knowledge Panel
         {
           type: "application/ld+json",
           innerHTML: JSON.stringify({
@@ -163,7 +139,6 @@ export default defineNuxtConfig({
             sameAs: ["https://www.instagram.com/etheera.tech/"],
           }),
         },
-        // LocalBusiness schema — yerel SEO
         {
           type: "application/ld+json",
           innerHTML: JSON.stringify({
@@ -258,13 +233,12 @@ export default defineNuxtConfig({
     },
     prerender: {
       crawlLinks: true,
-      failOnError: false, // ← hata olsa bile build devam etsin
-      ignore: [
-        "/portfolio/**", // ← payload hatasını tetikleyen route'ları ignore et
-      ],
+      failOnError: false,
+      ignore: ["/portfolio/**"],
       routes: ["/", "/portfolio", "/contact", "/start", "/sitemap.xml"],
     },
   },
+
   routeRules: {
     "/": { cache: { maxAge: 60 * 60 } },
     "/_nuxt/**": {
@@ -273,7 +247,6 @@ export default defineNuxtConfig({
     "/images/**": {
       headers: { "cache-control": "public, max-age=31536000, immutable" },
     },
-
     "/**": { cache: { maxAge: 60 * 60 * 24 } },
   },
 
