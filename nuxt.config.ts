@@ -21,7 +21,7 @@ export default defineNuxtConfig({
 
   primevue: {
     options: {
-      ripple: true,
+      ripple: false,
       inputVariant: "filled",
       theme: {
         preset: Aura,
@@ -264,9 +264,11 @@ export default defineNuxtConfig({
       routes: ["/", "/portfolio", "/contact", "/start", "/sitemap.xml"],
     },
   },
-  routeRules: {
-    "/**": { cache: { maxAge: 60 * 60 * 24 } },
-  },
+routeRules: {
+  "/": { cache: { maxAge: 60 * 60 } },
+  "/_nuxt/**": { headers: { "cache-control": "public, max-age=31536000, immutable" } },
+  "/images/**": { headers: { "cache-control": "public, max-age=31536000, immutable" } },
+},
 
   robots: {
     allow: "/",
