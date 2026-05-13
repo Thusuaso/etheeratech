@@ -8,7 +8,6 @@ export default defineNuxtConfig({
     "@nuxtjs/tailwindcss",
     "@nuxt/icon",
     "@primevue/nuxt-module",
-    "@nuxtjs/i18n",
     "@nuxtjs/seo",
     "nuxt-gtag",
   ],
