@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     "@nuxt/icon",
     "@primevue/nuxt-module",
     "@nuxtjs/seo",
-    "nuxt-gtag"
+    "nuxt-gtag",
   ],
 
   css: ["~/assets/css/main.css"],
@@ -17,6 +17,7 @@ export default defineNuxtConfig({
   // SSR inline style inject'ini kapat — entry CSS blocking'i azaltır
   experimental: {
     inlineSSRStyles: false,
+    renderJsonPayloads: true,
   },
 
   primevue: {
@@ -264,11 +265,17 @@ export default defineNuxtConfig({
       routes: ["/", "/portfolio", "/contact", "/start", "/sitemap.xml"],
     },
   },
-routeRules: {
-  "/": { cache: { maxAge: 60 * 60 } },
-  "/_nuxt/**": { headers: { "cache-control": "public, max-age=31536000, immutable" } },
-  "/images/**": { headers: { "cache-control": "public, max-age=31536000, immutable" } },
-},
+  routeRules: {
+    "/": { cache: { maxAge: 60 * 60 } },
+    "/_nuxt/**": {
+      headers: { "cache-control": "public, max-age=31536000, immutable" },
+    },
+    "/images/**": {
+      headers: { "cache-control": "public, max-age=31536000, immutable" },
+    },
+
+    "/**": { cache: { maxAge: 60 * 60 * 24 } },
+  },
 
   robots: {
     allow: "/",
