@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     "@nuxt/icon",
     "@primevue/nuxt-module",
     "@nuxtjs/seo",
-    "nuxt-gtag",
+    "nuxt-gtag"
   ],
 
   css: ["~/assets/css/main.css"],
