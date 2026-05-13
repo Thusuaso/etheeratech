@@ -27,5 +27,8 @@
     "@nuxtjs/seo": "^3.3.0",
     "@nuxtjs/tailwindcss": "^6.14.0",
     "nuxt-gtag": "^4.1.0"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }
