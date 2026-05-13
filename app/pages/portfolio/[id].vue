@@ -56,6 +56,26 @@ useSeoMeta({
             </span>
           </div>
         </div>
+
+        <!-- Visit Site Button -->
+        <a
+          v-if="project.link"
+          :href="project.link"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-semibold hover:shadow-lg hover:shadow-cyan-500/30 hover:scale-[1.02] transition-all duration-300"
+        >
+          <Icon name="heroicons:arrow-top-right-on-square" class="w-5 h-5" />
+          Visit Live Site
+        </a>
+
+        <div
+          v-else
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-800 border border-slate-700 text-slate-500 text-sm cursor-not-allowed"
+        >
+          <Icon name="heroicons:lock-closed" class="w-4 h-4" />
+          Private Project
+        </div>
       </div>
     </div>
 
