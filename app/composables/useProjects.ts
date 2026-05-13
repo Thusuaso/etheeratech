@@ -1,5 +1,5 @@
 // composables/useProjects.ts
-const R2 = "https://pub-661fac26fbe644859da00cb61b808b0c.r2.dev";
+const R2 = "https://assets.etheeratech.com/";
 
 export const useProjects = () => {
   return [
