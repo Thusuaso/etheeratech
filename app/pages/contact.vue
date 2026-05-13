@@ -1,9 +1,11 @@
 <script setup>
 useSeoMeta({
-  title: 'Contact & Get a Quote',
-  description: 'Ready to start your project? Get a free quote from Etheera Tech. We build web apps, e-commerce stores, bots, and automation solutions for clients worldwide.',
-  ogTitle: 'Contact Etheera Tech — Get a Free Project Quote',
-  ogDescription: 'Tell us about your project and we\'ll get back to you within 24 hours.',
+  title: 'Contact Etheera Tech | Shopify Development & Web Projects',
+  description:
+    'Get in touch with Etheera Tech for Shopify store development, theme customization, SEO audits, or web automation. Based in Turkey, serving clients in the US and Europe. We reply within 24 hours.',
+  ogTitle: 'Contact Etheera Tech — Shopify & Web Development Agency',
+  ogDescription:
+    'Tell us about your project and we\'ll get back to you within 24 hours with a clear scope and honest quote.',
   ogImage: '/images/social-share.png',
   twitterCard: 'summary_large_image',
 })
@@ -33,6 +35,30 @@ const budgets = [
   '$1,500 - $5,000',
   '$5,000+',
   'Not decided yet',
+]
+
+const whyUs = [
+  {
+    icon: 'heroicons:clock',
+    color: 'text-cyan-400',
+    bg: 'bg-cyan-500/10',
+    title: 'Reply within 24 hours',
+    desc: 'A real person — not a bot — reads every message and responds with something useful.',
+  },
+  {
+    icon: 'heroicons:shield-check',
+    color: 'text-purple-400',
+    bg: 'bg-purple-500/10',
+    title: 'No hard sell',
+    desc: 'We\'ll tell you honestly if your project is outside our scope or if you don\'t need us.',
+  },
+  {
+    icon: 'heroicons:shopping-cart',
+    color: 'text-emerald-400',
+    bg: 'bg-emerald-500/10',
+    title: 'Shopify specialists',
+    desc: 'From theme development and Liquid coding to SEO audits and product data pipelines.',
+  },
 ]
 
 let isLoading = ref(false)
@@ -89,21 +115,49 @@ const handleSubmit = async () => {
   <div class="pt-32 pb-20 container mx-auto px-6">
     <div class="grid lg:grid-cols-2 gap-16 items-start">
 
+      <!-- ─── LEFT COLUMN ──────────────────────────────────────────── -->
       <div class="space-y-8">
         <div>
+          <!-- H1: keyword-rich -->
           <h1 class="text-4xl md:text-5xl font-bold mb-6">
-            Let's Build Your Next <br />
+            Get a Free Quote for Your<br />
             <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
-              Big Thing Together
+              Shopify or Web Project
             </span>
           </h1>
-          <p class="text-slate-400 text-lg leading-relaxed">
-            We'd love to hear about your goals. Fill out the form and let's
-            talk about how we can bring your project to life.
+
+          <!-- Intro paragraph: specific, honest, keyword-rich -->
+          <p class="text-slate-400 text-lg leading-relaxed mb-4">
+            Whether you need a new Shopify store built from scratch, an existing
+            theme fixed, a technical SEO audit, or a custom automation pipeline —
+            fill in the form and tell us what you're working on.
+          </p>
+          <p class="text-slate-400 leading-relaxed">
+            We work with e-commerce brands, exporters, and small businesses across
+            Turkey, the US, and Europe. If it involves Shopify, Nuxt, or web
+            automation, there's a good chance we've seen it before.
           </p>
         </div>
 
-        <div class="space-y-4">
+        <!-- Why reach out cards -->
+        <div class="space-y-3">
+          <div
+            v-for="item in whyUs"
+            :key="item.title"
+            class="flex items-start gap-4 p-4 rounded-2xl bg-slate-800/30 border border-white/5"
+          >
+            <div :class="['w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0', item.bg]">
+              <Icon :name="item.icon" size="22" :class="item.color" />
+            </div>
+            <div>
+              <p class="text-white font-medium text-sm mb-0.5">{{ item.title }}</p>
+              <p class="text-slate-400 text-sm leading-relaxed">{{ item.desc }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact info -->
+        <div class="space-y-3">
           <div class="flex items-center gap-4 p-4 rounded-2xl bg-slate-800/30 border border-white/5">
             <div class="w-12 h-12 rounded-full bg-cyan-500/10 flex items-center justify-center text-cyan-400">
               <Icon name="heroicons:envelope" size="24" />
@@ -131,6 +185,7 @@ const handleSubmit = async () => {
         </div>
       </div>
 
+      <!-- ─── RIGHT COLUMN — FORM (unchanged) ────────────────────── -->
       <div class="relative">
         <div class="absolute -inset-4 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-[2rem] opacity-20 blur-xl"></div>
 
@@ -233,6 +288,7 @@ const handleSubmit = async () => {
           </Button>
         </form>
       </div>
+
     </div>
   </div>
 </template>

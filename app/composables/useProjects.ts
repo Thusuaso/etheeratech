@@ -24,6 +24,25 @@ export const useProjects = () => {
         "Cloudflare",
         "SEO",
       ],
+      content: {
+        problem:
+          "gobekusa.com needed a production-ready Shopify dropshipping store targeting US buyers of tile and natural stone. The main challenges were importing a large catalog of supplier products in the correct Shopify format, building a sample ordering flow that didn't exist in any off-the-shelf app, and ensuring the store ranked for competitive tile and stone search terms in the US market.",
+        solution: [
+          "Custom Shopify theme built and configured from scratch for tile and stone product categories",
+          "Bulk product import pipeline using Matrixify — Excel-based with correct variant columns, metafields, and image rows",
+          "Custom 'Buy Sample' feature built in Liquid and JavaScript using Shopify's Cart and Suggest APIs, with collection-level filtering to hide sample SKUs from browse pages",
+          "Collective app integrated for supplier product syncing and inventory automation",
+          "Judge.me reviews configured and seeded for social proof",
+          "Cloudflare set up for DNS management, caching, and performance",
+          "On-page SEO: meta titles, descriptions, collection page copy, and alt text across the catalog",
+        ],
+        result: [
+          "Live dropshipping store with a clean, conversion-focused storefront",
+          "Hundreds of products imported with correct variant structure and no duplicate handle errors",
+          "Sample ordering flow that works seamlessly without disrupting the main purchase path",
+          "Improved organic visibility for US tile and natural stone search terms",
+        ],
+      },
     },
     {
       id: "mekmar-shopify",
@@ -56,6 +75,26 @@ export const useProjects = () => {
         "Vercel",
         "SEO",
       ],
+      content: {
+        problem:
+          "Mekmar is a Denizli-based natural stone export company selling travertine, marble, and limestone to buyers across Europe and the US. Their existing online presence couldn't support international buyers: there was no multilingual storefront, product data was scattered across spreadsheets with no consistent structure, and the site had virtually no search visibility for natural stone export keywords. They needed a professional Shopify store that could operate in multiple languages, present a clean product catalog, and build trust with international wholesale buyers.",
+        solution: [
+          "Weglot multilingual setup with language-specific subdomain routing (e.g. en.mekmar.com, de.mekmar.com) — including DNS configuration on Cloudflare for each subdomain",
+          "Custom MutationObserver-based translation fix for the Storeify quote dialog: product titles and variant dropdown options now translate correctly into Weglot's active language using a buildTranslatedMap() function watching aria-hidden changes",
+          "Bulk product import pipeline via Matrixify: structured Excel files with correct variant columns, metafield naming conventions, and image-only rows — resolving recurring handle collision and field validation errors",
+          "Full technical SEO audit: meta titles and descriptions across all collection and product pages, JSON-LD Product schema markup injected via theme Liquid files, URL redirects from legacy structure, and robots.txt and sitemap cleanup",
+          "Google Reviews widget built with Google Places API, a Vercel serverless proxy, and Upstash Redis for caching and review approval management — embedded directly in the Shopify theme",
+          "Judge.me reviews app configured for product-level social proof",
+          "Alt text added to the full product image catalog for image search visibility",
+        ],
+        result: [
+          "A fully multilingual Shopify storefront serving buyers in English, German, and additional languages — with correct translations across product titles, variant options, and quote dialogs",
+          "Hundreds of natural stone products imported with clean variant structure, consistent metafields, and zero duplicate handle errors",
+          "Measurable improvement in organic search visibility for travertine, marble, and limestone export keywords in target markets",
+          "Live Google Reviews feed on the storefront, building trust with international wholesale buyers without requiring manual updates",
+          "A scalable product data pipeline that allows new stone collections to be imported from Excel with minimal effort",
+        ],
+      },
     },
     {
       id: "goz-mekmar",
@@ -86,6 +125,24 @@ export const useProjects = () => {
         "PrimeVue",
         "JWT Auth",
       ],
+      content: {
+        problem:
+          "A construction company managing multiple active sites had no central system for communication, task tracking, or document sharing. Project managers and field teams were coordinating via WhatsApp groups and email threads, making it impossible to track progress or access the right documents in the right context. They needed a private internal portal — fast, reliable, and accessible from any device on site.",
+        solution: [
+          "Full-stack internal web app built with Nuxt 3 on the frontend and a Python FastAPI backend connected to MS SQL Server",
+          "Real-time team chat and notifications via Socket.io, scoped per project and team",
+          "Project and task management module with assignment, status tracking, and priority levels",
+          "Document sharing with role-based access control — field workers see only their site, managers see all",
+          "Interactive dashboards built with Chart.js for project progress, task completion rates, and team activity",
+          "JWT-based authentication with role separation (admin, manager, worker)",
+        ],
+        result: [
+          "A single portal replacing fragmented WhatsApp and email coordination across all construction sites",
+          "Real-time visibility into task status and document availability for management",
+          "Role-based access ensuring sensitive project data stays within the right teams",
+          "Deployed as a private internal tool — not publicly accessible",
+        ],
+      },
     },
     {
       id: "emregeldi-project",
@@ -108,6 +165,26 @@ export const useProjects = () => {
         "Google Maps",
         "KVKK Compliance",
       ],
+      content: {
+        problem:
+          "Av. Emre Geldi is a Denizli-based attorney who needed a professional online presence that would rank for local legal search terms and convert visitors into consultation requests. The site needed to clearly communicate 14 distinct practice areas, comply with KVKK data privacy regulations, and make it as easy as possible for prospective clients to make contact.",
+        solution: [
+          "Professional Shopify-based corporate website built and configured with a custom theme",
+          "14 individual practice area pages with detailed legal content optimized for local SEO",
+          "Legal articles blog with category-based navigation for ongoing content publishing",
+          "Contact form with subject selection routing inquiries to the correct practice area",
+          "WhatsApp support widget for direct client communication",
+          "Google Maps integration for office location",
+          "KVKK and privacy compliance pages with links to official Turkish legal institutions",
+          "On-page SEO across all practice area pages targeting Denizli-specific legal search terms",
+        ],
+        result: [
+          "A complete professional web presence covering all practice areas with properly structured content",
+          "KVKK-compliant contact and data handling across the site",
+          "Multiple direct contact channels reducing friction for prospective clients",
+          "Improved local search visibility for legal services in the Denizli region",
+        ],
+      },
     },
     {
       id: "pandora-project",
@@ -131,6 +208,25 @@ export const useProjects = () => {
         "WhatsApp API",
         "Schema Markup",
       ],
+      content: {
+        problem:
+          "Pandora Temizlik is a professional cleaning company serving Denizli and its surrounding districts. Despite operating for several years, they had no website and were losing potential customers to competitors who appeared in local Google searches for terms like 'koltuk temizleme Denizli' or 'halı yıkama Pamukkale'. They needed a fast, mobile-friendly site that would rank across multiple Denizli districts and make booking easy.",
+        solution: [
+          "Full website built with Nuxt 3 and TailwindCSS, deployed on Vercel for optimal performance and image optimization",
+          "Dedicated service pages for sofa cleaning, carpet cleaning, mattress cleaning, and curtain cleaning — each with service-specific content and schema markup",
+          "District-based local SEO landing pages targeting Merkezefendi, Pamukkale, and Kınıklı with unique localized content",
+          "Pricing page with transparent service packages to reduce pre-contact friction",
+          "Photo gallery showcasing before/after cleaning results",
+          "Contact and appointment form integrated with WhatsApp API for instant communication",
+          "LocalBusiness JSON-LD schema markup for improved Google Maps and local search presence",
+        ],
+        result: [
+          "A fast, mobile-optimized website ranking for cleaning service keywords across multiple Denizli districts",
+          "District-level landing pages providing organic visibility in Merkezefendi, Pamukkale, and Kınıklı",
+          "WhatsApp-driven appointment flow reducing the steps between discovery and booking",
+          "Structured local SEO foundation that continues to build authority over time",
+        ],
+      },
     },
     {
       id: "velnora-project",
@@ -155,6 +251,24 @@ export const useProjects = () => {
         "SEO",
         "Theme Customization",
       ],
+      content: {
+        problem:
+          "VelnoraUSA needed a multi-category Shopify dropshipping store targeting US buyers across pet supplies, home decor, and lighting. The core challenges were building a scalable product sourcing and order fulfillment pipeline, setting up a multilingual storefront that didn't feel machine-translated, and ensuring collection and product pages were structured for organic search from day one.",
+        solution: [
+          "Shopify store built and fully configured with a custom theme optimized for multi-category browsing",
+          "DSers integrated for AliExpress product sourcing, inventory sync, and automated order fulfillment",
+          "Matrixify used for bulk product imports with correct category structure, variant mapping, and metafields",
+          "Weglot configured for multilingual storefront with translated collection pages, product descriptions, and navigation",
+          "SEO-optimized collection and product page templates with structured meta titles, descriptions, and URL structure",
+          "Theme customized for conversion: featured collections, trust badges, and streamlined checkout flow",
+        ],
+        result: [
+          "A fully operational multi-category dropshipping store with automated order fulfillment via DSers",
+          "Multilingual storefront reaching buyers in multiple markets from a single Shopify instance",
+          "Clean product catalog built for scale — new products can be imported and mapped in bulk",
+          "SEO-ready page structure providing a strong foundation for organic traffic growth",
+        ],
+      },
     },
   ];
 };

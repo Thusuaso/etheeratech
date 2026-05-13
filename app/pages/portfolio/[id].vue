@@ -7,7 +7,7 @@ const project = computed(() => {
 })
 
 useSeoMeta({
-  title: () => project.value ? project.value.title : 'Project Detail',
+  title: () => project.value ? `${project.value.title} | Etheera Tech` : 'Project Detail | Etheera Tech',
   description: () => project.value ? project.value.desc : 'Etheera Tech project details.',
   ogTitle: () => project.value?.title,
   ogDescription: () => project.value?.desc,
@@ -17,6 +17,8 @@ useSeoMeta({
 
 <template>
   <div v-if="project" class="container mx-auto py-24 px-4">
+
+    <!-- Back link -->
     <NuxtLink
       to="/portfolio"
       class="inline-flex items-center gap-2 text-slate-400 hover:text-cyan-400 mb-8 transition group"
@@ -25,6 +27,7 @@ useSeoMeta({
       Back to Portfolio
     </NuxtLink>
 
+    <!-- ─── HERO: image + title / stack / CTA ─────────────────────── -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16 items-start">
       <div class="rounded-2xl overflow-hidden border border-slate-700 shadow-2xl shadow-cyan-900/20 bg-slate-800">
         <img
@@ -57,7 +60,6 @@ useSeoMeta({
           </div>
         </div>
 
-        <!-- Visit Site Button -->
         <a
           v-if="project.link"
           :href="project.link"
@@ -79,9 +81,75 @@ useSeoMeta({
       </div>
     </div>
 
+    <!-- ─── PROBLEM / SOLUTION / RESULT ──────────────────────────── -->
+    <div v-if="project.content" class="border-t border-slate-800 pt-16 mb-16">
+
+      <h2 class="text-2xl font-bold text-white mb-10 border-l-4 border-cyan-500 pl-4">
+        Project breakdown
+      </h2>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+        <!-- Problem -->
+        <div class="bg-slate-800/30 border border-white/5 rounded-2xl p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-rose-500/10 flex items-center justify-center flex-shrink-0">
+              <Icon name="heroicons:exclamation-triangle" size="20" class="text-rose-400" />
+            </div>
+            <h3 class="text-white font-bold text-lg">The problem</h3>
+          </div>
+          <p class="text-slate-400 leading-relaxed text-sm">
+            {{ project.content.problem }}
+          </p>
+        </div>
+
+        <!-- Solution -->
+        <div class="bg-slate-800/30 border border-white/5 rounded-2xl p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-cyan-500/10 flex items-center justify-center flex-shrink-0">
+              <Icon name="heroicons:wrench-screwdriver" size="20" class="text-cyan-400" />
+            </div>
+            <h3 class="text-white font-bold text-lg">What we built</h3>
+          </div>
+          <ul class="space-y-3">
+            <li
+              v-for="(item, i) in project.content.solution"
+              :key="i"
+              class="flex items-start gap-2 text-sm text-slate-400 leading-relaxed"
+            >
+              <Icon name="heroicons:check" size="16" class="text-cyan-500 mt-0.5 flex-shrink-0" />
+              {{ item }}
+            </li>
+          </ul>
+        </div>
+
+        <!-- Result -->
+        <div class="bg-slate-800/30 border border-white/5 rounded-2xl p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
+              <Icon name="heroicons:chart-bar" size="20" class="text-emerald-400" />
+            </div>
+            <h3 class="text-white font-bold text-lg">The result</h3>
+          </div>
+          <ul class="space-y-3">
+            <li
+              v-for="(item, i) in project.content.result"
+              :key="i"
+              class="flex items-start gap-2 text-sm text-slate-400 leading-relaxed"
+            >
+              <Icon name="heroicons:arrow-trending-up" size="16" class="text-emerald-500 mt-0.5 flex-shrink-0" />
+              {{ item }}
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─── SCREENSHOTS ───────────────────────────────────────────── -->
     <div v-if="project.images && project.images.length > 0" class="border-t border-slate-800 pt-16">
       <h2 class="text-2xl font-bold text-white mb-8 border-l-4 border-cyan-500 pl-4">
-        Project Screenshots
+        Project screenshots
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div
@@ -97,8 +165,21 @@ useSeoMeta({
         </div>
       </div>
     </div>
+
+    <!-- ─── CTA ───────────────────────────────────────────────────── -->
+    <div class="border-t border-slate-800 pt-16 text-center">
+      <p class="text-slate-500 text-sm uppercase tracking-wider font-semibold mb-3">Want something similar?</p>
+      <h3 class="text-2xl font-bold text-white mb-6">Let's talk about your project</h3>
+      <NuxtLink to="/start">
+        <button class="px-8 py-3 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-bold hover:shadow-lg hover:shadow-cyan-500/30 transition-all">
+          Start My Project
+        </button>
+      </NuxtLink>
+    </div>
+
   </div>
 
+  <!-- Not found -->
   <div v-else class="min-h-[50vh] flex flex-col items-center justify-center text-center">
     <Icon name="heroicons:exclamation-circle" class="text-6xl text-slate-600 mb-4" />
     <h2 class="text-2xl font-bold text-white mb-2">Project Not Found</h2>
