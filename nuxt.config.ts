@@ -16,7 +16,7 @@ export default defineNuxtConfig({
   css: ["~/assets/css/main.css"],
 
   experimental: {
-    inlineSSRStyles: false,
+    inlineSSRStyles: true,
     renderJsonPayloads: true,
   },
 
