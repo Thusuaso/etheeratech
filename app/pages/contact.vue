@@ -19,7 +19,20 @@ const form = reactive({
   service: '',
   budget: '',
   message: '',
+  website: '',      // honeypot — insanlar görmez, boş kalmalı
+  _t: Date.now(),   // form açılış zamanı
 })
+
+const resetForm = () => {
+  form.name = ''
+  form.email = ''
+  form.phone = ''
+  form.service = ''
+  form.budget = ''
+  form.message = ''
+  form.website = ''
+  form._t = Date.now()
+}
 
 const services = [
   'Web Design',
@@ -61,9 +74,11 @@ const whyUs = [
   },
 ]
 
-let isLoading = ref(false)
+const isLoading = ref(false)
 
 const handleSubmit = async () => {
+  if (isLoading.value) return
+
   if (!form.name || !form.email || !form.phone) {
     toast.add({
       severity: 'warn',
@@ -79,7 +94,7 @@ const handleSubmit = async () => {
   try {
     const response = await $fetch('/api/send-telegram', {
       method: 'POST',
-      body: form,
+      body: { ...form },
     })
 
     if (response.success) {
@@ -89,19 +104,18 @@ const handleSubmit = async () => {
         detail: `Thanks ${form.name.split(' ')[0]}! We've received your project details and will get back to you shortly.`,
         life: 5000,
       })
-
-      form.name = ''
-      form.email = ''
-      form.phone = ''
-      form.service = ''
-      form.budget = ''
-      form.message = ''
+      resetForm()
     }
   } catch (error) {
+    const status = error?.statusCode || error?.response?.status
+
     toast.add({
-      severity: 'error',
-      summary: 'Submission Failed',
-      detail: 'Something went wrong on our end. Please reach us directly via WhatsApp or email.',
+      severity: status === 429 ? 'warn' : 'error',
+      summary: status === 429 ? 'Slow down' : 'Submission Failed',
+      detail:
+        status === 429
+          ? 'You\'ve sent a few requests already. Please try again in an hour, or email us directly.'
+          : 'Something went wrong on our end. Please reach us directly via WhatsApp or email.',
       life: 5000,
     })
     console.error(error)
@@ -118,7 +132,6 @@ const handleSubmit = async () => {
       <!-- ─── LEFT COLUMN ──────────────────────────────────────────── -->
       <div class="space-y-8">
         <div>
-          <!-- H1: keyword-rich -->
           <h1 class="text-4xl md:text-5xl font-bold mb-6">
             Get a Free Quote for Your<br />
             <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
@@ -126,7 +139,6 @@ const handleSubmit = async () => {
             </span>
           </h1>
 
-          <!-- Intro paragraph: specific, honest, keyword-rich -->
           <p class="text-slate-400 text-lg leading-relaxed mb-4">
             Whether you need a new Shopify store built from scratch, an existing
             theme fixed, a technical SEO audit, or a custom automation pipeline —
@@ -164,7 +176,7 @@ const handleSubmit = async () => {
             </div>
             <div>
               <p class="text-xs text-slate-500 uppercase font-bold">Email</p>
-              <a
+              
                 href="mailto:info@etheeratech.com"
                 class="text-white hover:text-cyan-400 transition"
               >
@@ -185,7 +197,7 @@ const handleSubmit = async () => {
         </div>
       </div>
 
-      <!-- ─── RIGHT COLUMN — FORM (unchanged) ────────────────────── -->
+      <!-- ─── RIGHT COLUMN — FORM ────────────────────────────────── -->
       <div class="relative">
         <div class="absolute -inset-4 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-[2rem] opacity-20 blur-xl"></div>
 
@@ -200,6 +212,7 @@ const handleSubmit = async () => {
                 v-model="form.name"
                 type="text"
                 required
+                maxlength="100"
                 class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all placeholder-slate-600"
                 placeholder="John Smith"
               />
@@ -210,10 +223,27 @@ const handleSubmit = async () => {
                 v-model="form.email"
                 type="email"
                 required
+                maxlength="150"
                 class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all placeholder-slate-600"
                 placeholder="you@company.com"
               />
             </div>
+          </div>
+
+          <!-- ── HONEYPOT — görünmez, botlar doldurur ── -->
+          <div
+            class="absolute left-[-9999px] top-0 h-0 w-0 overflow-hidden opacity-0"
+            aria-hidden="true"
+          >
+            <label for="website">Company Website</label>
+            <input
+              id="website"
+              v-model="form.website"
+              type="text"
+              name="website"
+              tabindex="-1"
+              autocomplete="off"
+            />
           </div>
 
           <div class="space-y-2 mt-6">
@@ -226,6 +256,7 @@ const handleSubmit = async () => {
                 v-model="form.phone"
                 type="tel"
                 required
+                maxlength="30"
                 class="w-full bg-slate-800 border border-slate-700 rounded-xl pl-8 pr-4 py-3 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all placeholder-slate-600"
                 placeholder="1 555 000 0000"
               />
@@ -268,6 +299,7 @@ const handleSubmit = async () => {
             <textarea
               v-model="form.message"
               rows="4"
+              maxlength="2000"
               class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all placeholder-slate-600"
               placeholder="Tell us a little about your project..."
             ></textarea>
@@ -277,6 +309,7 @@ const handleSubmit = async () => {
             type="submit"
             label="Request a Quote"
             :loading="isLoading"
+            :disabled="isLoading"
             class="w-full py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 border-none text-white font-bold text-lg hover:shadow-lg hover:shadow-cyan-500/30 hover:scale-[1.02] transition-all duration-300"
           >
             <template #icon v-if="!isLoading">
