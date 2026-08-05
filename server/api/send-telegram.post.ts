@@ -20,6 +20,7 @@ export default defineEventHandler(async (event) => {
 
   const ip =
     (getRequestHeader(event, "x-forwarded-for") || "").split(",")[0].trim() ||
+    getRequestHeader(event, "x-real-ip") ||
     "unknown";
   const origin = getRequestHeader(event, "origin") || "";
   const ua = getRequestHeader(event, "user-agent") || "none";

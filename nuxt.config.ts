@@ -15,8 +15,12 @@ export default defineNuxtConfig({
 
   css: ["~/assets/css/main.css"],
 
+  // inlineSSRStyles taşındı → features.inlineStyles
+  features: {
+    inlineStyles: true,
+  },
+
   experimental: {
-    inlineSSRStyles: true,
     renderJsonPayloads: true,
   },
 
@@ -64,11 +68,7 @@ export default defineNuxtConfig({
         },
       },
     },
-    server: {
-      fs: {
-        allow: [".", "..", "D:/Projects"],
-      },
-    },
+    // "D:/Projects" kaldırıldı — Vercel'de (Linux) anlamsız
   },
 
   app: {
@@ -106,7 +106,6 @@ export default defineNuxtConfig({
         { name: "ICBM", content: "37.7765, 29.0864" },
       ],
       link: [
-        { rel: "canonical", href: "https://etheeratech.com" },
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
         {
           rel: "icon",
@@ -182,8 +181,8 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    telegramBotToken: process.env.NUXT_TELEGRAM_BOT_TOKEN,
-    telegramChatId: process.env.NUXT_TELEGRAM_CHAT_ID,
+    telegramBotToken: "",
+    telegramChatId: "",
   },
 
   site: {
@@ -224,30 +223,25 @@ export default defineNuxtConfig({
     },
   },
 
+  // preset kaldırıldı — Vercel otomatik algılar
   nitro: {
-    preset: "cloudflare_pages",
-    cloudflare: {
-      wrangler: {
-        compatibility_date: "2025-01-01",
-      },
-    },
     prerender: {
       crawlLinks: true,
       failOnError: false,
-      ignore: ["/portfolio/**"],
-      routes: ["/", "/portfolio", "/contact", "/start", "/sitemap.xml"],
+      routes: ["/", "/portfolio", "/contact", "/start"],
     },
   },
 
   routeRules: {
-    "/": { cache: { maxAge: 60 * 60 } },
+    "/api/**": { cache: false, robots: false },
     "/_nuxt/**": {
       headers: { "cache-control": "public, max-age=31536000, immutable" },
     },
     "/images/**": {
       headers: { "cache-control": "public, max-age=31536000, immutable" },
     },
-    "/**": { cache: { maxAge: 60 * 60 * 24 } },
+    "/": { isr: 3600 },
+    "/portfolio/**": { isr: 86400 },
   },
 
   robots: {
