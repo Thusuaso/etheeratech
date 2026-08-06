@@ -1,112 +1,115 @@
 <script setup>
-const projects = useProjects()
+const projects = useProjects();
 
 useSeoMeta({
-  title: 'Portfolio — Shopify, Web Apps & Automation Projects | Etheera Tech',
+  title: "Work",
   description:
-    'Real projects built by Etheera Tech: multilingual Shopify stores, e-commerce dropshipping, internal ERP portals, local SEO websites, and web automation pipelines — delivered for clients in Turkey, the US, and Europe.',
-  ogTitle: 'Etheera Tech Portfolio — Real Projects, Real Results',
+    "Shopify stores, catalogue pipelines, ERP portals, and automation built by Etheera Tech for clients in Turkey, the US, and Europe — natural stone export, wholesale tile, dropshipping, and local SEO.",
+  ogTitle: "Work — Etheera Tech",
   ogDescription:
-    'Shopify development, Nuxt web apps, automation pipelines and local SEO — browse our latest client work.',
-  ogImage: '/images/social-share.png',
-  twitterCard: 'summary_large_image',
-})
+    "Shopify development, Nuxt web apps, catalogue pipelines and automation. Browse the projects.",
+  ogImage: "/images/social-share.png",
+  twitterCard: "summary_large_image",
+});
 </script>
 
 <template>
-  <div class="container mx-auto py-20 px-4">
+  <div class="pt-14">
+    <!-- MASTHEAD -->
+    <section class="mx-auto max-w-6xl px-5 pt-20 pb-10">
+      <p class="label text-cobalt mb-8">Selected work</p>
 
-    <!-- ─── HEADER ─────────────────────────────────────────────────── -->
-    <div class="text-center mb-16">
-      <div
-        class="inline-block px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold tracking-wide uppercase mb-4"
+      <h1
+        class="font-display font-semibold tracking-[-0.03em] leading-[1] text-[2.4rem] sm:text-[3.4rem] max-w-3xl text-balance"
       >
-        6 projects · Shopify, Nuxt, Python
-      </div>
-
-      <h1 class="text-4xl font-bold text-white mb-4">
-        Our Work
+        Stores that had to carry weight.
       </h1>
 
-      <p class="text-slate-400 max-w-2xl mx-auto leading-relaxed">
-        From multilingual Shopify stores for natural stone exporters to local SEO
-        websites, internal ERP portals, and dropshipping automation pipelines —
-        every project is built with real technical depth, not templates.
+      <p class="mt-8 text-lg leading-relaxed max-w-2xl text-ink/85">
+        Multilingual storefronts for natural stone exporters, wholesale tile
+        catalogues built for the US market, internal ERP portals, and the
+        automation underneath them. Every one shipped and running.
       </p>
 
-      <!-- Category pills — purely descriptive, no filter logic needed -->
-      <div class="flex flex-wrap justify-center gap-2 mt-6">
-        <span class="text-xs px-3 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-slate-400">Shopify Development</span>
-        <span class="text-xs px-3 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-slate-400">Nuxt & Vue</span>
-        <span class="text-xs px-3 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-slate-400">E-Commerce</span>
-        <span class="text-xs px-3 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-slate-400">SEO</span>
-        <span class="text-xs px-3 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-slate-400">Automation</span>
-        <span class="text-xs px-3 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-slate-400">Web Apps</span>
-      </div>
-    </div>
-
-    <!-- ─── PROJECT GRID (unchanged) ──────────────────────────────── -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <NuxtLink
-        v-for="project in projects"
-        :key="project.id"
-        :to="`/portfolio/${project.id}`"
-        class="group bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-cyan-500 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-900/20"
-      >
-        <div class="h-56 overflow-hidden relative">
-          <img
-            :src="project.gif"
-            :alt="`${project.title} — Etheera Tech Project`"
-            class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500"
-          />
-          <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"></div>
+      <dl class="grid grid-cols-2 sm:grid-cols-4 border-t border-ink mt-10">
+        <div class="py-3 pr-4 border-b border-rule sm:border-b-0">
+          <dt class="label mb-1">Projects</dt>
+          <dd class="font-mono text-[0.85rem]">{{ projects.length }} filed</dd>
         </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition">
+        <div class="py-3 pr-4 border-b border-rule sm:border-b-0">
+          <dt class="label mb-1">Markets</dt>
+          <dd class="font-mono text-[0.85rem]">TR · US · EU</dd>
+        </div>
+        <div class="py-3 pr-4">
+          <dt class="label mb-1">Core platform</dt>
+          <dd class="font-mono text-[0.85rem]">Shopify</dd>
+        </div>
+        <div class="py-3 pr-4">
+          <dt class="label mb-1">Also</dt>
+          <dd class="font-mono text-[0.85rem]">Nuxt · Python</dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- GRID -->
+    <section class="mx-auto max-w-6xl px-5">
+      <div
+        class="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-rule border-t border-ink"
+      >
+        <NuxtLink
+          v-for="(project, i) in projects"
+          :key="project.id"
+          :to="`/portfolio/${project.id}`"
+          class="group bg-paper hover:bg-panel transition-colors p-6 flex flex-col min-h-[15rem]"
+        >
+          <div class="flex items-baseline justify-between mb-4">
+            <span class="font-mono text-[0.7rem] text-cobalt">
+              N&deg;{{ String(i + 1).padStart(2, "0") }}
+            </span>
+            <span class="label">{{ project.techStack.length }} tools</span>
+          </div>
+
+          <h2
+            class="font-display font-semibold text-[1.05rem] tracking-tight leading-snug group-hover:text-cobalt transition-colors"
+          >
             {{ project.title }}
-          </h3>
-          <p class="text-slate-400 text-sm line-clamp-2 mb-4">
+          </h2>
+
+          <p
+            class="mt-2 text-[0.95rem] leading-relaxed text-ink/75 line-clamp-4"
+          >
             {{ project.desc }}
           </p>
-          <div class="flex flex-wrap gap-2">
-            <span
-              v-for="(tech, index) in project.techStack.slice(0, 3)"
-              :key="index"
-              class="text-xs font-medium bg-slate-900 text-cyan-400 px-2 py-1 rounded"
-            >
-              {{ tech }}
-            </span>
-            <span
-              v-if="project.techStack.length > 3"
-              class="text-xs text-slate-500 py-1"
-            >
-              +{{ project.techStack.length - 3 }} more
-            </span>
-          </div>
-        </div>
-      </NuxtLink>
-    </div>
 
-    <!-- ─── BOTTOM CTA ─────────────────────────────────────────────── -->
-    <div class="text-center mt-20 pt-16 border-t border-slate-800">
-      <p class="text-slate-500 text-sm uppercase tracking-wider font-semibold mb-3">
-        Ready to build yours?
-      </p>
-      <h2 class="text-2xl font-bold text-white mb-4">
-        Let's add your project to this list
-      </h2>
-      <p class="text-slate-400 text-sm mb-8 max-w-md mx-auto">
-        Shopify store, web app, automation pipeline, or local SEO site —
-        tell us what you need and we'll scope it out for free.
-      </p>
-      <NuxtLink to="/start">
-        <button
-          class="px-8 py-3 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-bold hover:shadow-lg hover:shadow-cyan-500/30 transition-all"
+          <p
+            class="font-mono text-[0.7rem] text-graphite mt-auto pt-4 border-t border-rule"
+          >
+            {{ project.techStack.slice(0, 4).join(" · ") }}
+          </p>
+        </NuxtLink>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="mx-auto max-w-6xl px-5 mt-20">
+      <div class="border-t border-ink pt-10">
+        <h2
+          class="font-display font-semibold text-[1.9rem] sm:text-[2.6rem] tracking-tight leading-[1.05] max-w-2xl"
         >
-          Start My Project
-        </button>
-      </NuxtLink>
-    </div>
-
+          Add yours to the file.
+        </h2>
+        <p class="mt-5 text-[1.02rem] leading-relaxed max-w-xl text-ink/85">
+          Describe what is failing in your store &mdash; or what you are trying
+          to build &mdash; and you get a written read of where the work actually
+          sits.
+        </p>
+        <NuxtLink
+          to="/contact"
+          class="inline-block mt-8 font-mono text-[0.85rem] tracking-wide text-paper bg-ink px-6 py-3 hover:bg-cobalt transition-colors"
+        >
+          Start a project &rarr;
+        </NuxtLink>
+      </div>
+    </section>
   </div>
 </template>

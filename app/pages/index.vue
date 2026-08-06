@@ -1,197 +1,241 @@
 <script setup>
+import { systems } from "~/data/systems";
+import { notes } from "~/data/notes";
+
 useSeoMeta({
-  title: 'Shopify Developer & E-Commerce Agency | Etheera Tech',
+  title: "Shopify Systems for Material Brands",
   description:
-    'Etheera Tech builds and optimizes Shopify stores for global e-commerce brands. Custom theme development, SEO audits, automation pipelines, and Nuxt web apps. Based in Turkey, serving clients worldwide.',
-  ogTitle: 'Etheera Tech — Shopify Development, SEO & Web Automation Agency',
+    "Etheera Tech builds Shopify systems for brands shipping material — stone, tile, flooring, furniture. Live LTL freight rating, catalogue import pipelines, and product feed remediation. Denizli, Turkey.",
+  ogTitle: "Etheera Tech — Shopify Systems for Material Brands",
   ogDescription:
-    'Custom Shopify stores, theme customization, SEO audits, and automation bots. We turn your e-commerce vision into a high-converting digital experience.',
-  ogImage: '/images/social-share.png',
-  twitterCard: 'summary_large_image',
-})
+    "Freight that rates in the cart. Catalogues that import clean at scale. Feeds that pass review.",
+  ogImage: "/images/social-share.png",
+  twitterCard: "summary_large_image",
+});
 
-const services = [
-  {
-    title: 'UI/UX Design',
-    desc: 'Clean, modern interfaces tailored to your brand — wireframes, prototypes, and pixel-perfect designs that keep users engaged from the very first click.',
-    icon: 'heroicons:paint-brush',
-    color: 'text-purple-400',
-  },
-  {
-    title: 'Nuxt & Vue Development',
-    desc: 'Fast, SEO-friendly, and scalable web applications built with the latest Vue ecosystem. SSR, SSG, hybrid rendering — whichever fits your project best.',
-    icon: 'heroicons:code-bracket',
-    color: 'text-cyan-400',
-  },
-  {
-    title: 'Shopify & E-Commerce Development',
-    desc: 'Custom Shopify theme development, Liquid coding, app integrations, product import pipelines (Matrixify), multilingual setups (Weglot), and conversion-focused storefront design — end to end.',
-    icon: 'heroicons:shopping-cart',
-    color: 'text-emerald-400',
-  },
-  {
-    title: 'SEO & Performance Optimization',
-    desc: 'Technical SEO audits, Core Web Vitals fixes, structured data (JSON-LD), meta tag optimization, sitemap and robots.txt cleanup — ranked results you can actually measure.',
-    icon: 'heroicons:presentation-chart-line',
-    color: 'text-orange-400',
-  },
-  {
-    title: 'Bots, Scrapers & Automation',
-    desc: 'Web scraping pipelines with Playwright and BeautifulSoup, Shopify product data automation, Telegram bots, and custom scripts that eliminate hours of manual work every week.',
-    icon: 'heroicons:cpu-chip',
-    color: 'text-rose-400',
-  },
-  {
-    title: 'Digital Consulting',
-    desc: "Not sure where to start? We help you pick the right tech stack, map out your roadmap, and avoid costly mistakes before a single line of code is written.",
-    icon: 'heroicons:light-bulb',
-    color: 'text-yellow-400',
-  },
-]
+const projects = useProjects();
+const featured = computed(() => projects.slice(0, 3));
 
-const stats = [
-  { value: '10+', label: 'Projects delivered' },
-  { value: '3', label: 'Countries served' },
-  { value: 'Shopify', label: 'Core platform' },
-]
+const latestNotes = computed(() => notes.slice(0, 3));
 </script>
 
 <template>
-  <div class="pt-32 pb-20">
+  <div class="pt-14">
+    <!-- ── HERO ─────────────────────────────────────────────── -->
+    <section class="mx-auto max-w-6xl px-5 pt-20 pb-6">
+      <p class="label text-cobalt mb-8">
+        Shopify operations &middot; Denizli, Turkey
+      </p>
 
-    <!-- ─── HERO ─────────────────────────────────────────────────── -->
-    <section
-      class="container mx-auto px-6 text-center lg:text-left lg:flex items-center justify-between min-h-[60vh]"
-    >
-      <div class="lg:w-1/2 space-y-6">
+      <h1
+        class="font-display font-semibold tracking-[-0.03em] leading-[0.98] text-[2.6rem] sm:text-[3.8rem] lg:text-[4.6rem] max-w-4xl text-balance"
+      >
+        Somebody has to make the catalogue work.
+      </h1>
+
+      <div class="grid lg:grid-cols-12 gap-8 mt-10">
+        <p class="lg:col-span-7 text-lg leading-relaxed text-ink/85">
+          We build Shopify systems for brands shipping material — stone, tile,
+          flooring, furniture. Freight that rates live in the cart. Supplier
+          catalogues that import clean at scale. Product feeds that pass review
+          instead of sitting disapproved. The half of e-commerce nobody puts in
+          a case study.
+        </p>
 
         <div
-          class="inline-block px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold tracking-wide uppercase mb-4"
+          class="lg:col-span-4 lg:col-start-9 flex lg:justify-end items-start"
         >
-          🚀 Your Digital Transformation Starts Here
+          <NuxtLink
+            to="/contact"
+            class="font-mono text-[0.8rem] tracking-wide text-cobalt border-b border-cobalt pb-1 hover:text-ink hover:border-ink transition-colors"
+          >
+            Start a project &rarr;
+          </NuxtLink>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SIGNATURE: THE MANIFEST ──────────────────────────── -->
+    <section class="mx-auto max-w-6xl px-5 mt-14">
+      <div class="flex items-baseline justify-between mb-3">
+        <p class="label">Currently running</p>
+        <p class="label">{{ systems.length }} systems on the rack</p>
+      </div>
+
+      <div class="border-t border-ink">
+        <!-- column heads -->
+        <div
+          class="hidden md:grid grid-cols-12 gap-4 py-2 border-b border-rule"
+        >
+          <span class="label col-span-1">N&deg;</span>
+          <span class="label col-span-3">System</span>
+          <span class="label col-span-5">What it does</span>
+          <span class="label col-span-2">Layer</span>
+          <span class="label col-span-1 text-right">Status</span>
         </div>
 
-        <!-- H1: keyword-rich, specific -->
-        <h1 class="text-5xl lg:text-7xl font-extrabold leading-tight">
-          Shopify Development &amp;<br />
-          <span
-            class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500"
-          >
-            E-Commerce Solutions
+        <NuxtLink
+          v-for="s in systems"
+          :key="s.n"
+          :to="`/systems#${s.slug}`"
+          class="group grid md:grid-cols-12 gap-1 md:gap-4 py-4 border-b border-rule hover:bg-panel transition-colors"
+        >
+          <span class="font-mono text-[0.75rem] text-cobalt md:col-span-1">
+            N&deg;{{ s.n }}
           </span>
-          That Actually Convert
-        </h1>
-
-        <!-- Extended descriptive paragraph -->
-        <p class="text-slate-400 text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed">
-          We build and scale Shopify stores — from custom theme development
-          and multilingual setups to product data pipelines and technical SEO
-          audits. Based in Turkey, delivering results for clients in the US,
-          Europe, and beyond. Whether you're launching your first store or
-          fixing a broken one, we have the technical depth to do it right.
-        </p>
-
-        <!-- CTA buttons -->
-        <div
-          class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4"
-        >
-          <NuxtLink to="/start">
-            <button
-              class="px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-bold shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/50 transition-all"
-            >
-              Start My Project
-            </button>
-          </NuxtLink>
-          <NuxtLink to="/portfolio">
-            <button
-              class="px-8 py-4 rounded-xl border border-slate-700 text-slate-300 hover:bg-white/5 hover:text-white hover:border-white transition-all flex items-center justify-center gap-2"
-            >
-              <Icon name="heroicons:squares-2x2" size="24" />
-              View Our Work
-            </button>
-          </NuxtLink>
-        </div>
-
-        <!-- Social proof stats -->
-        <div class="flex gap-8 pt-6 justify-center lg:justify-start">
-          <div v-for="stat in stats" :key="stat.label" class="text-center lg:text-left">
-            <p class="text-2xl font-bold text-white">{{ stat.value }}</p>
-            <p class="text-xs text-slate-500 uppercase tracking-wide mt-0.5">{{ stat.label }}</p>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Code block visual (unchanged) -->
-      <div class="hidden lg:block lg:w-1/2 relative">
-        <div
-          class="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-600 blur-[100px] opacity-20 rounded-full"
-        ></div>
-        <div
-          class="relative z-10 bg-slate-800/50 border border-white/10 backdrop-blur-xl p-8 rounded-3xl shadow-2xl transform rotate-3 hover:rotate-0 transition duration-500"
-        >
-          <div class="flex items-center gap-2 mb-4">
-            <div class="w-3 h-3 rounded-full bg-red-500"></div>
-            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-            <div class="w-3 h-3 rounded-full bg-green-500"></div>
-          </div>
-          <div class="space-y-4 font-mono text-sm text-slate-300">
-            <p>
-              <span class="text-purple-400">const</span> agency =
-              <span class="text-yellow-300">"Etheera Tech"</span>;
-            </p>
-            <p>
-              <span class="text-purple-400">await</span> agency.<span
-                class="text-blue-400"
-                >buildShopifyStore</span
-              >();
-            </p>
-            <p>
-              <span class="text-purple-400">await</span> agency.<span
-                class="text-emerald-400"
-                >optimizeSEO</span
-              >();
-            </p>
-            <p>
-              <span class="text-purple-400">await</span> agency.<span
-                class="text-rose-400"
-                >automateEverything</span
-              >();
-            </p>
-            <p class="text-slate-500">// Result: Peak Performance ⚡</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ─── SERVICES ──────────────────────────────────────────────── -->
-    <section id="services" class="container mx-auto px-6 mt-32">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4">What We Do</h2>
-        <!-- Keyword-rich, specific social proof -->
-        <p class="text-slate-400 max-w-2xl mx-auto">
-          From Shopify theme customization to full-stack Nuxt web apps —
-          10+ projects delivered for clients in e-commerce, natural stone
-          export, and B2B services across Turkey, the US, and Europe.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-8">
-        <div
-          v-for="service in services"
-          :key="service.title"
-          class="group p-8 rounded-3xl bg-slate-800/30 border border-white/5 hover:border-cyan-500/30 hover:bg-slate-800/60 transition-all duration-300"
-        >
-          <div
-            class="w-14 h-14 rounded-2xl bg-slate-900 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-white/10"
+          <span
+            class="font-display font-semibold text-[1.05rem] tracking-tight md:col-span-3 group-hover:text-cobalt transition-colors"
           >
-            <Icon :name="service.icon" size="32" :class="service.color" />
-          </div>
-          <h3 class="text-xl font-bold mb-3 text-white">{{ service.title }}</h3>
-          <p class="text-slate-400 leading-relaxed">{{ service.desc }}</p>
+            {{ s.name }}
+          </span>
+          <span class="text-[0.95rem] text-ink/80 md:col-span-5">
+            {{ s.line }}
+          </span>
+          <span class="font-mono text-[0.72rem] text-graphite md:col-span-2">
+            {{ s.layer }}
+          </span>
+          <span
+            class="font-mono text-[0.68rem] md:col-span-1 md:text-right"
+            :class="s.status === 'live' ? 'text-cobalt' : 'text-oxide'"
+          >
+            {{ s.status }}
+          </span>
+        </NuxtLink>
+      </div>
+
+      <p class="mt-5 text-[0.95rem] text-graphite max-w-2xl">
+        Each one came out of a real store with a real problem, then got kept and
+        reused. Nothing here is a package you can buy off a pricing page.
+      </p>
+    </section>
+
+    <!-- ── POSITION ─────────────────────────────────────────── -->
+    <section class="mx-auto max-w-6xl px-5 mt-28">
+      <p class="label mb-6">The position</p>
+      <div class="grid lg:grid-cols-12 gap-8 border-t border-ink pt-8">
+        <h2
+          class="lg:col-span-6 font-display font-semibold text-[1.9rem] sm:text-[2.4rem] tracking-tight leading-[1.08]"
+        >
+          A slab is not a t&#8209;shirt.
+        </h2>
+        <div
+          class="lg:col-span-6 space-y-4 text-[1.02rem] leading-relaxed text-ink/85"
+        >
+          <p>
+            Themes and apps are written for products that weigh nothing, look
+            identical, and ship in a box. Material breaks all three assumptions.
+            A pallet of travertine has a freight class. Two tiles from the same
+            lot are different colours. A $5 sample today is a $20,000 order
+            twelve weeks from now, and nothing in a stock cart remembers that.
+          </p>
+          <p>
+            We come from the material side first — natural stone export,
+            wholesale tile, furniture import — and learned the Shopify half
+            because the operation needed it. That order matters. Most agencies
+            arrive with the platform and meet the material later.
+          </p>
         </div>
       </div>
     </section>
 
+    <!-- ── SELECTED WORK ────────────────────────────────────── -->
+    <section class="mx-auto max-w-6xl px-5 mt-28">
+      <div class="flex items-baseline justify-between mb-3">
+        <p class="label">Selected work</p>
+        <NuxtLink
+          to="/portfolio"
+          class="label text-cobalt hover:text-ink transition-colors"
+        >
+          All projects &rarr;
+        </NuxtLink>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-px bg-rule border-t border-ink">
+        <NuxtLink
+          v-for="p in featured"
+          :key="p.id"
+          :to="`/portfolio/${p.id}`"
+          class="group bg-paper hover:bg-panel transition-colors p-6 flex flex-col min-h-[11rem]"
+        >
+          <h3
+            class="font-display font-semibold text-[1.05rem] tracking-tight leading-snug group-hover:text-cobalt transition-colors"
+          >
+            {{ p.title }}
+          </h3>
+          <p
+            class="font-mono text-[0.7rem] text-graphite mt-auto pt-4 border-t border-rule"
+          >
+            {{ p.techStack.slice(0, 3).join(" · ") }}
+          </p>
+        </NuxtLink>
+      </div>
+    </section>
+
+    <!-- ── FIELD NOTES ──────────────────────────────────────── -->
+    <section class="mx-auto max-w-6xl px-5 mt-28">
+      <div class="flex items-baseline justify-between mb-3">
+        <p class="label">Field notes</p>
+        <NuxtLink
+          to="/notes"
+          class="label text-cobalt hover:text-ink transition-colors"
+        >
+          All notes &rarr;
+        </NuxtLink>
+      </div>
+
+      <div class="border-t border-ink">
+        <NuxtLink
+          v-for="note in latestNotes"
+          :key="note.n"
+          :to="`/notes/${note.slug}`"
+          class="group grid md:grid-cols-12 gap-1 md:gap-4 py-5 border-b border-rule hover:bg-panel transition-colors"
+        >
+          <span class="font-mono text-[0.75rem] text-cobalt md:col-span-1">
+            N&deg;{{ note.n }}
+          </span>
+          <h3
+            class="md:col-span-7 font-display font-semibold text-[1.1rem] tracking-tight leading-snug group-hover:text-cobalt transition-colors"
+          >
+            {{ note.title }}
+          </h3>
+          <span class="font-mono text-[0.72rem] text-graphite md:col-span-3">
+            {{ note.tags.join(" · ") }}
+          </span>
+          <span
+            class="font-mono text-[0.72rem] text-graphite md:col-span-1 md:text-right"
+          >
+            {{ note.read }}
+          </span>
+        </NuxtLink>
+      </div>
+
+      <p class="mt-5 text-[0.95rem] text-graphite max-w-2xl">
+        Working notes from inside the engagements — what broke, what we changed,
+        and what we would do differently.
+      </p>
+    </section>
+
+    <!-- ── CTA ──────────────────────────────────────────────── -->
+    <section class="mx-auto max-w-6xl px-5 mt-28">
+      <div class="border-t border-ink pt-10">
+        <h2
+          class="font-display font-semibold text-[2rem] sm:text-[2.8rem] tracking-tight leading-[1.05] max-w-2xl"
+        >
+          Tell us what is breaking.
+        </h2>
+        <p class="mt-5 text-[1.02rem] leading-relaxed max-w-xl text-ink/85">
+          A store that will not rate freight, a catalogue that will not import,
+          a feed sitting disapproved. Describe it and you get a written read of
+          where it is failing and what we would build first &mdash; before any
+          talk of scope or price.
+        </p>
+        <NuxtLink
+          to="/contact"
+          class="inline-block mt-8 font-mono text-[0.85rem] tracking-wide text-paper bg-ink px-6 py-3 hover:bg-cobalt transition-colors"
+        >
+          Start a project &rarr;
+        </NuxtLink>
+      </div>
+    </section>
   </div>
 </template>

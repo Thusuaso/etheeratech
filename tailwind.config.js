@@ -1,22 +1,30 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./components/**/*.{js,vue,ts}",
-    "./layouts/**/*.vue",
-    "./pages/**/*.vue",
-    "./plugins/**/*.{js,ts}",
-    "./app.vue",
-    "./error.vue",
+    "./app/components/**/*.{js,vue,ts}",
+    "./app/layouts/**/*.vue",
+    "./app/pages/**/*.vue",
+    "./app/app.vue",
+    "./app/error.vue",
   ],
   theme: {
     extend: {
-      fontFamily: {
-        // Nuxt config'de eklediğimiz Outfit fontunu varsayılan yapalım
-        sans: ["Outfit", "sans-serif"],
-      },
       colors: {
-        // Etheera Tech'e özel koyu tonları özelleştirebiliriz
-        // Standart slate-900 kullanıyoruz ama buraya özel renk de ekleyebilirsiniz.
+        paper: "#E9E7E2",
+        panel: "#DFDCD5",
+        ink: "#14171B",
+        graphite: "#5B6169",
+        rule: "#C6C2BA",
+        cobalt: "#1B3FCB",
+        oxide: "#A6431E",
+      },
+      fontFamily: {
+        display: ["Archivo", "ui-sans-serif", "system-ui", "sans-serif"],
+        body: ["Newsreader", "Georgia", "serif"],
+        mono: ["IBM Plex Mono", "ui-monospace", "monospace"],
+      },
+      letterSpacing: {
+        label: "0.12em",
       },
     },
   },

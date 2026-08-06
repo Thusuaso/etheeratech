@@ -1,4 +1,10 @@
 node_modules/
 .nuxt
+.output
+.vercel
+dist
+.env
+.env.*
+!.env.example
 package-lock.json
 public/images/projects/

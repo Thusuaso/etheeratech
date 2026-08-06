@@ -22,10 +22,15 @@ export default defineNuxtConfig({
 
   experimental: {
     renderJsonPayloads: true,
+    payloadExtraction: false,
   },
 
   fonts: {
-    families: [{ name: "Outfit", weights: [300, 400, 600, 700] }],
+    families: [
+      { name: "Archivo", weights: [400, 500, 600] },
+      { name: "Newsreader", weights: [400] },
+      { name: "IBM Plex Mono", weights: [400, 500] },
+    ],
   },
 
   primevue: {
@@ -35,7 +40,7 @@ export default defineNuxtConfig({
       theme: {
         preset: Aura,
         options: {
-          darkModeSelector: "system",
+          darkModeSelector: false,
           cssLayer: {
             name: "primevue",
             order: "tailwind-base, primevue, tailwind-utilities",
@@ -196,18 +201,17 @@ export default defineNuxtConfig({
       { loc: "/portfolio", priority: 0.9, changefreq: "weekly" },
       { loc: "/contact", priority: 0.9, changefreq: "monthly" },
       { loc: "/start", priority: 0.8, changefreq: "monthly" },
-      { loc: "/portfolio/goz-mekmar", priority: 0.7, changefreq: "monthly" },
+      { loc: "/systems", priority: 0.9, changefreq: "monthly" },
+      { loc: "/notes", priority: 0.8, changefreq: "weekly" },
       {
-        loc: "/portfolio/mekmar-project",
+        loc: "/notes/merchant-center-misrepresentation",
         priority: 0.7,
-        changefreq: "monthly",
+        changefreq: "yearly",
       },
-      { loc: "/portfolio/bulut-project", priority: 0.7, changefreq: "monthly" },
-      { loc: "/portfolio/rast-project", priority: 0.7, changefreq: "monthly" },
       {
-        loc: "/portfolio/ravilion-project",
+        loc: "/notes/shopify-ltl-freight",
         priority: 0.7,
-        changefreq: "monthly",
+        changefreq: "yearly",
       },
     ],
     defaults: {
@@ -225,7 +229,7 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
-    "/api/**": { cache: false, robots: false },
+    "/api/**": { cache: false },
     "/_nuxt/**": {
       headers: { "cache-control": "public, max-age=31536000, immutable" },
     },

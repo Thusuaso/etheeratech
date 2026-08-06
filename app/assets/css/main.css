@@ -1,8 +1,64 @@
-/* assets/css/main.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply bg-slate-900 text-white;
+@layer base {
+  body {
+    @apply bg-paper text-ink font-body antialiased;
+  }
+
+  ::selection {
+    @apply bg-cobalt text-paper;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-cobalt ring-offset-2 ring-offset-paper;
+  }
+}
+
+@layer components {
+  /* Monospace utility label — used for every eyebrow, column head, and data cell */
+  .label {
+    @apply font-mono text-[0.65rem] uppercase tracking-label text-graphite;
+  }
+
+  .rule-t {
+    @apply border-t border-rule;
+  }
+
+  .rule-ink {
+    @apply border-t border-ink;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@layer components {
+  /* Long-form reading column for field notes */
+  .note-prose {
+    @apply text-[1.05rem] leading-[1.72] text-ink/85;
+  }
+  .note-prose > p {
+    @apply mb-5;
+  }
+  .note-prose h2 {
+    @apply font-display font-semibold text-[1.45rem] tracking-tight text-ink
+           mt-14 mb-4 pt-5 border-t border-rule;
+  }
+  .note-prose strong {
+    @apply text-ink font-semibold;
+  }
+  .note-prose code {
+    @apply font-mono text-[0.85em] bg-panel px-1.5 py-0.5;
+  }
+  .note-prose a {
+    @apply text-cobalt border-b border-cobalt/40 hover:border-cobalt transition-colors;
+  }
 }

@@ -1,188 +1,173 @@
 <script setup>
 const links = [
-  { name: 'Services',  to: '/#services' },
-  { name: 'Portfolio', to: '/portfolio' },
-  { name: 'Contact',   to: '/contact' },
-]
+  { name: "Systems", to: "/systems" },
+  { name: "Work", to: "/portfolio" },
+  { name: "Notes", to: "/notes" },
+];
+
+const open = ref(false);
+const route = useRoute();
+watch(
+  () => route.fullPath,
+  () => {
+    open.value = false;
+  },
+);
+
+const year = new Date().getFullYear();
 </script>
 
 <template>
-  <div
-    class="min-h-screen bg-slate-900 text-white font-sans selection:bg-cyan-500 selection:text-white"
-  >
+  <div class="min-h-screen bg-paper text-ink font-body flex flex-col">
+    <!-- HEADER -->
     <header
-      class="fixed top-0 w-full z-50 border-b border-white/10 bg-slate-900/80 backdrop-blur-md"
+      class="fixed top-0 inset-x-0 z-50 bg-paper/90 backdrop-blur-sm border-b border-rule"
     >
-      <div class="container mx-auto px-6 h-20 flex items-center justify-between">
+      <div
+        class="mx-auto max-w-6xl px-5 h-14 flex items-center justify-between"
+      >
         <NuxtLink
           to="/"
-          class="text-2xl font-bold tracking-tighter flex items-center gap-2"
+          class="font-display font-semibold text-[0.95rem] tracking-tight"
         >
-          <div class="w-8 h-8 bg-gradient-to-br from-cyan-400 to-purple-600 rounded-lg"></div>
-          Etheera<span class="text-cyan-400">Tech</span>.
+          Etheera<span class="text-cobalt">.</span>
         </NuxtLink>
 
-        <nav class="hidden md:flex gap-8">
+        <nav class="hidden md:flex items-center gap-7">
           <NuxtLink
             v-for="link in links"
             :key="link.name"
             :to="link.to"
-            class="text-sm font-medium text-slate-300 hover:text-cyan-400 transition-colors"
+            class="label hover:text-ink transition-colors"
           >
             {{ link.name }}
           </NuxtLink>
+          <NuxtLink
+            to="/contact"
+            class="label text-cobalt border-b border-cobalt pb-0.5 hover:text-ink hover:border-ink transition-colors"
+          >
+            Start a project
+          </NuxtLink>
         </nav>
 
-        <NuxtLink
-          to="/contact"
-          class="hidden md:block px-5 py-2.5 rounded-full bg-white text-slate-900 font-semibold text-sm hover:bg-cyan-50 transition transform hover:scale-105"
+        <button
+          class="md:hidden label text-ink"
+          :aria-expanded="open"
+          aria-label="Toggle menu"
+          @click="open = !open"
         >
-          Get a Quote
+          {{ open ? "Close" : "Menu" }}
+        </button>
+      </div>
+
+      <div v-if="open" class="md:hidden border-t border-rule bg-paper">
+        <NuxtLink
+          v-for="link in links"
+          :key="link.name"
+          :to="link.to"
+          class="block px-5 py-3 label border-b border-rule hover:text-ink"
+        >
+          {{ link.name }}
+        </NuxtLink>
+        <NuxtLink to="/contact" class="block px-5 py-3 label text-cobalt">
+          Start a project
         </NuxtLink>
       </div>
     </header>
 
-    <slot />
+    <main class="flex-1">
+      <slot />
+    </main>
 
-    <footer
-      class="relative bg-slate-900 border-t border-white/10 pt-20 pb-10 overflow-hidden"
-    >
-      <div
-        class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-cyan-500/5 blur-[120px] rounded-full pointer-events-none"
-      ></div>
+    <!-- FOOTER -->
+    <footer class="border-t border-ink mt-24">
+      <div class="mx-auto max-w-6xl px-5 py-14">
+        <p
+          class="font-display text-2xl md:text-3xl font-semibold tracking-tight max-w-lg leading-[1.15]"
+        >
+          Shopify systems for brands that ship material.
+        </p>
 
-      <div class="container mx-auto px-6 relative z-10">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-
-          <div class="space-y-6">
-            <NuxtLink
-              to="/"
-              class="text-2xl font-bold tracking-tighter flex items-center gap-2"
-            >
-              <div class="w-8 h-8 bg-gradient-to-br from-cyan-400 to-purple-600 rounded-lg"></div>
-              Etheera<span class="text-cyan-400">Tech</span>.
-            </NuxtLink>
-
-            <p class="text-slate-400 leading-relaxed text-sm">
-              We design tomorrow's digital experiences today. Transform your
-              brand with web, mobile, and AI-powered solutions.
-            </p>
-
-            <div class="flex gap-4">
-              <a
-                href="https://www.instagram.com/etheera.tech/"
-                class="w-10 h-10 rounded-full bg-slate-800 border border-white/5 flex items-center justify-center text-slate-400 hover:bg-cyan-500 hover:text-white hover:border-cyan-500 transition-all duration-300"
-              >
-                <Icon name="mdi:instagram" size="20" />
-              </a>
-              <a
-                href="#"
-                class="w-10 h-10 rounded-full bg-slate-800 border border-white/5 flex items-center justify-center text-slate-400 hover:bg-blue-500 hover:text-white hover:border-blue-500 transition-all duration-300"
-              >
-                <Icon name="mdi:linkedin" size="20" />
-              </a>
-              <a
-                href="#"
-                class="w-10 h-10 rounded-full bg-slate-800 border border-white/5 flex items-center justify-center text-slate-400 hover:bg-sky-400 hover:text-white hover:border-sky-400 transition-all duration-300"
-              >
-                <Icon name="mdi:twitter" size="20" />
-              </a>
-              <a
-                href="#"
-                class="w-10 h-10 rounded-full bg-slate-800 border border-white/5 flex items-center justify-center text-slate-400 hover:bg-white hover:text-black hover:border-white transition-all duration-300"
-              >
-                <Icon name="mdi:github" size="20" />
-              </a>
-            </div>
-          </div>
-
+        <div
+          class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mt-12 pt-8 border-t border-rule"
+        >
           <div>
-            <h3 class="text-white font-bold mb-6">Company</h3>
-            <ul class="space-y-4 text-sm text-slate-400">
-              <li>
+            <p class="label mb-3">Pages</p>
+            <ul class="space-y-2">
+              <li v-for="link in links" :key="link.name">
                 <NuxtLink
-                  to="/"
-                  class="hover:text-cyan-400 transition-colors flex items-center gap-2"
+                  :to="link.to"
+                  class="font-mono text-[0.8rem] hover:text-cobalt transition-colors"
                 >
-                  <Icon name="heroicons:chevron-right" size="12" /> Home
-                </NuxtLink>
-              </li>
-              <li>
-                <NuxtLink
-                  to="/portfolio"
-                  class="hover:text-cyan-400 transition-colors flex items-center gap-2"
-                >
-                  <Icon name="heroicons:chevron-right" size="12" /> Portfolio
+                  {{ link.name }}
                 </NuxtLink>
               </li>
               <li>
                 <NuxtLink
                   to="/contact"
-                  class="hover:text-cyan-400 transition-colors flex items-center gap-2"
+                  class="font-mono text-[0.8rem] hover:text-cobalt transition-colors"
                 >
-                  <Icon name="heroicons:chevron-right" size="12" /> Contact & Quote
+                  Contact
                 </NuxtLink>
               </li>
             </ul>
           </div>
 
           <div>
-            <h3 class="text-white font-bold mb-6">Services</h3>
-            <ul class="space-y-4 text-sm text-slate-400">
-              <li>
-                <NuxtLink to="/#services" class="hover:text-purple-400 transition-colors">
-                  Web Design & UI/UX
-                </NuxtLink>
-              </li>
-              <li>
-                <NuxtLink to="/#services" class="hover:text-purple-400 transition-colors">
-                  Bot & Automation
-                </NuxtLink>
-              </li>
-              <li>
-                <NuxtLink to="/#services" class="hover:text-purple-400 transition-colors">
-                  E-Commerce Development
-                </NuxtLink>
-              </li>
-              <li>
-                <NuxtLink to="/#services" class="hover:text-purple-400 transition-colors">
-                  SEO Optimization
-                </NuxtLink>
-              </li>
+            <p class="label mb-3">Practice</p>
+            <ul class="space-y-2 font-mono text-[0.8rem] text-graphite">
+              <li>Freight &amp; shipping logic</li>
+              <li>Catalogue pipelines</li>
+              <li>Feed &amp; channel health</li>
+              <li>Storefront development</li>
             </ul>
           </div>
 
           <div>
-            <h3 class="text-white font-bold mb-6">Get in Touch</h3>
-            <ul class="space-y-4 text-sm text-slate-400">
-              <li class="flex items-start gap-3">
-                <Icon name="heroicons:map-pin" class="w-5 h-5 text-cyan-500 mt-0.5" />
-                <span>Denizli Technopark,<br />Turkey</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <Icon name="heroicons:envelope" class="w-5 h-5 text-cyan-500" />
-                <a href="mailto:info@etheeratech.com" class="hover:text-white transition">
+            <p class="label mb-3">Contact</p>
+            <ul class="space-y-2 font-mono text-[0.8rem]">
+              <li>
+                <a
+                  href="mailto:info@etheeratech.com"
+                  class="hover:text-cobalt transition-colors"
+                >
                   info@etheeratech.com
                 </a>
               </li>
-              <li class="flex items-center gap-3">
-                <Icon name="heroicons:phone" class="w-5 h-5 text-cyan-500" />
-                <a href="tel:+905530257011" class="hover:text-white transition">
+              <li>
+                <a
+                  href="tel:+905530257011"
+                  class="hover:text-cobalt transition-colors"
+                >
                   +90 553 025 70 11
+                </a>
+              </li>
+              <li class="text-graphite">Denizli, Turkey</li>
+            </ul>
+          </div>
+
+          <div>
+            <p class="label mb-3">Elsewhere</p>
+            <ul class="space-y-2 font-mono text-[0.8rem]">
+              <li>
+                <a
+                  href="https://www.instagram.com/etheera.tech/"
+                  target="_blank"
+                  rel="noopener"
+                  class="hover:text-cobalt transition-colors"
+                >
+                  Instagram
                 </a>
               </li>
             </ul>
           </div>
         </div>
 
-        <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p class="text-slate-500 text-sm">
-            &copy; {{ new Date().getFullYear() }} Etheera Tech. All rights reserved.
-          </p>
-          <div class="flex gap-6 text-sm text-slate-500">
-            <a href="#" class="hover:text-white transition">Privacy Policy</a>
-            <a href="#" class="hover:text-white transition">Terms of Use</a>
-          </div>
+        <div
+          class="flex flex-wrap gap-x-6 gap-y-2 justify-between mt-12 pt-5 border-t border-rule label"
+        >
+          <span>&copy; {{ year }} Etheera Tech</span>
+          <span>Denizli &middot; Remote</span>
         </div>
       </div>
     </footer>

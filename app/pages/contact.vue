@@ -1,16 +1,14 @@
 <script setup>
 useSeoMeta({
-  title: "Contact Etheera Tech | Shopify Development & Web Projects",
+  title: "Start a project",
   description:
-    "Get in touch with Etheera Tech for Shopify store development, theme customization, SEO audits, or web automation. Based in Turkey, serving clients in the US and Europe. We reply within 24 hours.",
-  ogTitle: "Contact Etheera Tech — Shopify & Web Development Agency",
+    "Tell us what is breaking — freight that will not rate, a catalogue that will not import, a feed sitting disapproved. You get a written read of where it is failing before any talk of scope or price.",
+  ogTitle: "Start a project — Etheera Tech",
   ogDescription:
-    "Tell us about your project and we'll get back to you within 24 hours with a clear scope and honest quote.",
+    "Describe what is failing in your store and you get a written read of where it is breaking.",
   ogImage: "/images/social-share.png",
   twitterCard: "summary_large_image",
 });
-
-const toast = useToast();
 
 const form = reactive({
   name: "",
@@ -24,68 +22,64 @@ const form = reactive({
 });
 
 const resetForm = () => {
-  form.name = "";
-  form.email = "";
-  form.phone = "";
-  form.service = "";
-  form.budget = "";
-  form.message = "";
-  form.website = "";
-  form._t = Date.now();
+  Object.assign(form, {
+    name: "",
+    email: "",
+    phone: "",
+    service: "",
+    budget: "",
+    message: "",
+    website: "",
+    _t: Date.now(),
+  });
 };
 
 const services = [
-  "Web Design",
-  "E-Commerce",
-  "SEO & Marketing",
-  "Custom Software",
-  "Bot & Automation",
-  "Other",
+  { k: "01", v: "Freight & shipping logic" },
+  { k: "02", v: "Catalogue import pipeline" },
+  { k: "03", v: "Feed / channel remediation" },
+  { k: "04", v: "Storefront development" },
+  { k: "05", v: "Automation & scraping" },
+  { k: "06", v: "Something else" },
 ];
 
 const budgets = [
-  "$500 - $1,500",
+  "Under $1,500",
   "$1,500 - $5,000",
   "$5,000+",
   "Not decided yet",
 ];
 
-const whyUs = [
+const commitments = [
   {
-    icon: "heroicons:clock",
-    color: "text-cyan-400",
-    bg: "bg-cyan-500/10",
-    title: "Reply within 24 hours",
-    desc: "A real person — not a bot — reads every message and responds with something useful.",
+    k: "Reply",
+    v: "Within 24 hours",
+    d: "A person reads it, not an autoresponder.",
   },
   {
-    icon: "heroicons:shield-check",
-    color: "text-purple-400",
-    bg: "bg-purple-500/10",
-    title: "No hard sell",
-    desc: "We'll tell you honestly if your project is outside our scope or if you don't need us.",
+    k: "First response",
+    v: "A written read",
+    d: "Where we think the problem actually sits, before any scope or price.",
   },
   {
-    icon: "heroicons:shopping-cart",
-    color: "text-emerald-400",
-    bg: "bg-emerald-500/10",
-    title: "Shopify specialists",
-    desc: "From theme development and Liquid coding to SEO audits and product data pipelines.",
+    k: "If it is not a fit",
+    v: "We say so",
+    d: "Including when you do not need us, or when a cheaper fix exists.",
   },
 ];
 
 const isLoading = ref(false);
+const status = ref(null); // { type: 'ok' | 'warn' | 'error', text: string }
 
 const handleSubmit = async () => {
   if (isLoading.value) return;
+  status.value = null;
 
   if (!form.name || !form.email || !form.phone) {
-    toast.add({
-      severity: "warn",
-      summary: "Missing Information",
-      detail: "Please fill in your name, email, and phone number.",
-      life: 3000,
-    });
+    status.value = {
+      type: "warn",
+      text: "Name, email, and phone are needed before this can be sent.",
+    };
     return;
   }
 
@@ -98,26 +92,25 @@ const handleSubmit = async () => {
     });
 
     if (response.success) {
-      toast.add({
-        severity: "success",
-        summary: "Request Received",
-        detail: `Thanks ${form.name.split(" ")[0]}! We've received your project details and will get back to you shortly.`,
-        life: 5000,
-      });
+      const first = form.name.split(" ")[0];
       resetForm();
+      status.value = {
+        type: "ok",
+        text: `Received, ${first}. We will come back to you within 24 hours.`,
+      };
     }
   } catch (error) {
-    const status = error?.statusCode || error?.response?.status;
-
-    toast.add({
-      severity: status === 429 ? "warn" : "error",
-      summary: status === 429 ? "Slow down" : "Submission Failed",
-      detail:
-        status === 429
-          ? "You have sent a few requests already. Please try again in an hour, or email us directly."
-          : "Something went wrong on our end. Please reach us directly via WhatsApp or email.",
-      life: 5000,
-    });
+    const code = error?.statusCode || error?.response?.status;
+    status.value =
+      code === 429
+        ? {
+            type: "warn",
+            text: "That is a few requests in a short window. Try again in an hour, or email info@etheeratech.com directly.",
+          }
+        : {
+            type: "error",
+            text: "This did not send. Email info@etheeratech.com and we will pick it up there.",
+          };
     console.error(error);
   } finally {
     isLoading.value = false;
@@ -126,235 +119,220 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <div class="pt-32 pb-20 container mx-auto px-6">
-    <div class="grid lg:grid-cols-2 gap-16 items-start">
-      <!-- LEFT COLUMN -->
-      <div class="space-y-8">
-        <div>
-          <h1 class="text-4xl md:text-5xl font-bold mb-6">
-            Get a Free Quote for Your<br />
-            <span
-              class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500"
-            >
-              Shopify or Web Project
-            </span>
+  <div class="pt-14">
+    <section class="mx-auto max-w-6xl px-5 pt-20 pb-24">
+      <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <!-- ── LEFT: the brief ─────────────────────────────── -->
+        <div class="lg:col-span-5">
+          <p class="label text-cobalt mb-8">Start a project</p>
+
+          <h1
+            class="font-display font-semibold tracking-[-0.03em] leading-[1.02] text-[2.3rem] sm:text-[2.9rem] text-balance"
+          >
+            Tell us what is breaking.
           </h1>
 
-          <p class="text-slate-400 text-lg leading-relaxed mb-4">
-            Whether you need a new Shopify store built from scratch, an existing
-            theme fixed, a technical SEO audit, or a custom automation pipeline
-            — fill in the form and tell us what you're working on.
+          <p class="mt-7 text-[1.05rem] leading-relaxed text-ink/85">
+            A store that will not rate freight. A supplier catalogue that will
+            not import cleanly. A product feed sitting disapproved for the third
+            week. Describe the failure, not the project &mdash; that is the part
+            we can actually read.
           </p>
-          <p class="text-slate-400 leading-relaxed">
-            We work with e-commerce brands, exporters, and small businesses
-            across Turkey, the US, and Europe. If it involves Shopify, Nuxt, or
-            web automation, there's a good chance we've seen it before.
-          </p>
-        </div>
 
-        <!-- Why reach out cards -->
-        <div class="space-y-3">
-          <div
-            v-for="item in whyUs"
-            :key="item.title"
-            class="flex items-start gap-4 p-4 rounded-2xl bg-slate-800/30 border border-white/5"
-          >
+          <!-- commitments, as a spec block -->
+          <dl class="mt-10 border-t border-ink">
             <div
-              :class="[
-                'w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0',
-                item.bg,
-              ]"
+              v-for="c in commitments"
+              :key="c.k"
+              class="py-4 border-b border-rule"
             >
-              <Icon :name="item.icon" size="22" :class="item.color" />
+              <dt class="label mb-1">{{ c.k }}</dt>
+              <dd class="font-mono text-[0.85rem] mb-1">{{ c.v }}</dd>
+              <dd class="text-[0.95rem] text-graphite leading-relaxed">
+                {{ c.d }}
+              </dd>
+            </div>
+          </dl>
+
+          <dl class="mt-8 space-y-3">
+            <div>
+              <dt class="label mb-1">Direct</dt>
+              <dd>
+                <a
+                  href="mailto:info@etheeratech.com"
+                  class="font-mono text-[0.85rem] border-b border-rule hover:text-cobalt hover:border-cobalt transition-colors"
+                >
+                  info@etheeratech.com
+                </a>
+              </dd>
             </div>
             <div>
-              <p class="text-white font-medium text-sm mb-0.5">
-                {{ item.title }}
-              </p>
-              <p class="text-slate-400 text-sm leading-relaxed">
-                {{ item.desc }}
-              </p>
+              <dt class="label mb-1">Studio</dt>
+              <dd class="font-mono text-[0.85rem] text-graphite">
+                Denizli, Turkey &middot; Remote
+              </dd>
             </div>
-          </div>
+          </dl>
         </div>
 
-        <!-- Contact info -->
-        <div class="space-y-3">
-          <div
-            class="flex items-center gap-4 p-4 rounded-2xl bg-slate-800/30 border border-white/5"
-          >
-            <div
-              class="w-12 h-12 rounded-full bg-cyan-500/10 flex items-center justify-center text-cyan-400"
-            >
-              <Icon name="heroicons:envelope" size="24" />
-            </div>
-            <div>
-              <p class="text-xs text-slate-500 uppercase font-bold">Email</p>
-              <a
-                href="mailto:info@etheeratech.com"
-                class="text-white hover:text-cyan-400 transition"
-              >
-                info@etheeratech.com
-              </a>
-            </div>
-          </div>
+        <!-- ── RIGHT: the form ─────────────────────────────── -->
+        <div class="lg:col-span-6 lg:col-start-7">
+          <form novalidate class="relative" @submit.prevent="handleSubmit">
+            <p class="label pb-3 border-b border-ink">
+              Project brief &mdash; all fields on one page
+            </p>
 
-          <div
-            class="flex items-center gap-4 p-4 rounded-2xl bg-slate-800/30 border border-white/5"
-          >
-            <div
-              class="w-12 h-12 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-400"
-            >
-              <Icon name="heroicons:map-pin" size="24" />
-            </div>
-            <div>
-              <p class="text-xs text-slate-500 uppercase font-bold">Office</p>
-              <p class="text-white">Denizli Technopark, Turkey</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- RIGHT COLUMN - FORM -->
-      <div class="relative">
-        <div
-          class="absolute -inset-4 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-[2rem] opacity-20 blur-xl"
-        ></div>
-
-        <form
-          @submit.prevent="handleSubmit"
-          class="relative bg-slate-900/90 backdrop-blur-xl border border-white/10 p-8 rounded-[2rem] shadow-2xl space-y-6"
-        >
-          <div class="grid md:grid-cols-2 gap-6">
-            <div class="space-y-2">
-              <label class="text-sm font-medium text-slate-300 ml-1"
-                >Full Name</label
-              >
+            <!-- name -->
+            <div class="pt-6">
+              <label for="f-name" class="label block mb-2">
+                Name <span class="text-cobalt">*</span>
+              </label>
               <input
+                id="f-name"
                 v-model="form.name"
                 type="text"
-                required
                 maxlength="100"
-                class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all placeholder-slate-600"
-                placeholder="John Smith"
+                autocomplete="name"
+                placeholder="Jane Okonkwo"
+                class="w-full bg-transparent border-b border-rule pb-2 font-mono text-[0.9rem] placeholder:text-graphite/60 focus:border-cobalt focus:outline-none transition-colors"
               />
             </div>
-            <div class="space-y-2">
-              <label class="text-sm font-medium text-slate-300 ml-1"
-                >Email Address</label
-              >
+
+            <!-- email -->
+            <div class="pt-7">
+              <label for="f-email" class="label block mb-2">
+                Email <span class="text-cobalt">*</span>
+              </label>
               <input
+                id="f-email"
                 v-model="form.email"
                 type="email"
-                required
                 maxlength="150"
-                class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all placeholder-slate-600"
-                placeholder="you@company.com"
+                autocomplete="email"
+                placeholder="jane@company.com"
+                class="w-full bg-transparent border-b border-rule pb-2 font-mono text-[0.9rem] placeholder:text-graphite/60 focus:border-cobalt focus:outline-none transition-colors"
               />
             </div>
-          </div>
 
-          <!-- HONEYPOT -->
-          <div
-            class="absolute left-[-9999px] top-0 h-0 w-0 overflow-hidden opacity-0"
-            aria-hidden="true"
-          >
-            <label for="website">Company Website</label>
-            <input
-              id="website"
-              v-model="form.website"
-              type="text"
-              name="website"
-              tabindex="-1"
-              autocomplete="off"
-            />
-          </div>
-
-          <div class="space-y-2 mt-6">
-            <label class="text-sm font-medium text-slate-300 ml-1"
-              >Phone Number</label
+            <!-- HONEYPOT -->
+            <div
+              class="absolute left-[-9999px] top-0 h-0 w-0 overflow-hidden opacity-0"
+              aria-hidden="true"
             >
-            <div class="relative">
-              <div
-                class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"
-              >
-                <span class="text-slate-500 text-sm">+</span>
-              </div>
+              <label for="website">Company website</label>
               <input
+                id="website"
+                v-model="form.website"
+                type="text"
+                name="website"
+                tabindex="-1"
+                autocomplete="off"
+              />
+            </div>
+
+            <!-- phone -->
+            <div class="pt-7">
+              <label for="f-phone" class="label block mb-2">
+                Phone <span class="text-cobalt">*</span>
+              </label>
+              <input
+                id="f-phone"
                 v-model="form.phone"
                 type="tel"
-                required
                 maxlength="30"
-                class="w-full bg-slate-800 border border-slate-700 rounded-xl pl-8 pr-4 py-3 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all placeholder-slate-600"
-                placeholder="1 555 000 0000"
+                autocomplete="tel"
+                placeholder="+1 555 000 0000"
+                class="w-full bg-transparent border-b border-rule pb-2 font-mono text-[0.9rem] placeholder:text-graphite/60 focus:border-cobalt focus:outline-none transition-colors"
               />
             </div>
-          </div>
 
-          <div class="space-y-3">
-            <label class="text-sm font-medium text-slate-300 ml-1"
-              >What do you need help with?</label
-            >
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-              <button
-                type="button"
-                v-for="item in services"
-                :key="item"
-                @click="form.service = item"
-                :class="[
-                  'px-3 py-3 rounded-xl text-sm font-medium border transition-all duration-200',
-                  form.service === item
-                    ? 'bg-cyan-500 text-white border-cyan-500 shadow-lg shadow-cyan-500/20'
-                    : 'bg-slate-800 text-slate-400 border-slate-700 hover:border-slate-500',
-                ]"
+            <!-- service, as a ledger -->
+            <fieldset class="pt-9">
+              <legend class="label mb-3">Where it is failing</legend>
+              <div class="border-t border-rule">
+                <button
+                  v-for="s in services"
+                  :key="s.k"
+                  type="button"
+                  :aria-pressed="form.service === s.v"
+                  class="w-full flex items-baseline gap-4 py-3 border-b border-rule text-left transition-colors"
+                  :class="
+                    form.service === s.v
+                      ? 'bg-panel text-ink'
+                      : 'hover:bg-panel/60 text-graphite'
+                  "
+                  @click="form.service = s.v"
+                >
+                  <span
+                    class="font-mono text-[0.7rem] w-8 shrink-0"
+                    :class="form.service === s.v ? 'text-cobalt' : 'text-rule'"
+                  >
+                    {{ form.service === s.v ? "■" : s.k }}
+                  </span>
+                  <span class="font-mono text-[0.85rem]">{{ s.v }}</span>
+                </button>
+              </div>
+            </fieldset>
+
+            <!-- budget -->
+            <div class="pt-7">
+              <label for="f-budget" class="label block mb-2">Budget</label>
+              <select
+                id="f-budget"
+                v-model="form.budget"
+                class="w-full bg-transparent border-b border-rule pb-2 font-mono text-[0.9rem] focus:border-cobalt focus:outline-none transition-colors"
               >
-                {{ item }}
-              </button>
+                <option value="">Not specified</option>
+                <option v-for="b in budgets" :key="b" :value="b">
+                  {{ b }}
+                </option>
+              </select>
             </div>
-          </div>
 
-          <div class="space-y-2">
-            <label class="text-sm font-medium text-slate-300 ml-1"
-              >Estimated Budget</label
-            >
-            <select
-              v-model="form.budget"
-              class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-slate-300 focus:outline-none focus:border-cyan-500 transition-all"
-            >
-              <option value="" disabled selected>Select a range</option>
-              <option v-for="b in budgets" :key="b" :value="b">{{ b }}</option>
-            </select>
-          </div>
+            <!-- message -->
+            <div class="pt-7">
+              <label for="f-message" class="label block mb-2">
+                What is happening
+              </label>
+              <textarea
+                id="f-message"
+                v-model="form.message"
+                rows="5"
+                maxlength="2000"
+                placeholder="Rates stopped returning for some addresses about two weeks ago. No error, the shipping step just shows nothing."
+                class="w-full bg-transparent border-b border-rule pb-2 font-mono text-[0.9rem] leading-relaxed placeholder:text-graphite/60 focus:border-cobalt focus:outline-none transition-colors resize-y"
+              ></textarea>
+            </div>
 
-          <div class="space-y-2">
-            <label class="text-sm font-medium text-slate-300 ml-1"
-              >Project Details</label
+            <!-- status -->
+            <p
+              v-if="status"
+              role="status"
+              aria-live="polite"
+              class="mt-7 font-mono text-[0.82rem] leading-relaxed border-l-2 pl-4 py-2"
+              :class="{
+                'border-cobalt text-ink': status.type === 'ok',
+                'border-oxide text-oxide':
+                  status.type === 'warn' || status.type === 'error',
+              }"
             >
-            <textarea
-              v-model="form.message"
-              rows="4"
-              maxlength="2000"
-              class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all placeholder-slate-600"
-              placeholder="Tell us a little about your project..."
-            ></textarea>
-          </div>
+              {{ status.text }}
+            </p>
 
-          <Button
-            type="submit"
-            label="Request a Quote"
-            :loading="isLoading"
-            :disabled="isLoading"
-            class="w-full py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 border-none text-white font-bold text-lg hover:shadow-lg hover:shadow-cyan-500/30 hover:scale-[1.02] transition-all duration-300"
-          >
-            <template #icon v-if="!isLoading">
-              <Icon name="heroicons:paper-airplane" class="w-6 h-6" />
-            </template>
-            <template #loadingicon>
-              <Icon name="heroicons:arrow-path" class="w-6 h-6 animate-spin" />
-            </template>
-          </Button>
-        </form>
+            <!-- submit -->
+            <div class="pt-9 flex flex-wrap items-center gap-5">
+              <button
+                type="submit"
+                :disabled="isLoading"
+                class="font-mono text-[0.85rem] tracking-wide text-paper bg-ink px-7 py-3 hover:bg-cobalt disabled:opacity-50 disabled:hover:bg-ink transition-colors"
+              >
+                {{ isLoading ? "Sending…" : "Send brief →" }}
+              </button>
+              <span class="label">Reply within 24 hours</span>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+    </section>
   </div>
 </template>
