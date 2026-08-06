@@ -59,15 +59,8 @@ export default defineNuxtConfig({
 
   vite: {
     build: {
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            vendor: ["vue", "vue-router"],
-          },
-        },
-      },
+      cssCodeSplit: true,
     },
-    // "D:/Projects" kaldırıldı — Vercel'de (Linux) anlamsız
   },
 
   app: {
